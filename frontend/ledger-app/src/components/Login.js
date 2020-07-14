@@ -58,10 +58,10 @@ class Login extends Component {
                     }
                 })
                 .catch((error) => {
-                    console.log(error, "catch the hoop")
+                    console.log(error, "Fetch request failed")
                 });
         } else if (this.state.buttonAction === "Create") {
-            const requestUrl = "https://klingons.pythonanywhere.com/api/auth/users/";
+            const requestUrl = "#";
             console.log("Create called")
             let response = fetch(requestUrl, {
                 method: "POST",
@@ -192,7 +192,7 @@ class Login extends Component {
                                             }}
                                         >Sign Up</Button><div style={this.state.lsuState==="SignUp" ? {display:"none"} : {display: "inline"}}>
                                         <div style={{boxShadow: "0px 0px 5px 5px rgba(255,255,255,.2)"}}>New to
-                                            Trivia Knights? Just hit Signup above and give us a good email to reach you at.
+                                            Ledger? Just hit Signup above and leave an email to reach you at.
                                         </div></div>
                                     </Form>)}
                             </Formik>
