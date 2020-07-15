@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.dispatch import receiver
+from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 
 
@@ -11,6 +12,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     registration_date = models.DateTimeField("date-registered")
+    phone_number = PhoneNumberField(null=True)
     type = models.CharField(default="Doctor or Patient?", max_length=50, choices=TYPE_CHOICES)
 
 

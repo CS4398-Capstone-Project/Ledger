@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Profile
 from rest_framework import serializers
 from . import models
 from . import serializers as serializer
@@ -28,4 +28,4 @@ This serializer controls how the Profile is returned when called.
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Profile
-        fields = ['user', 'bio', 'location', 'birth_date', 'date_registered', 'classification']
+        fields = ['user', 'bio', 'location', 'birth_date', 'date_registered','phone_number', 'type']
