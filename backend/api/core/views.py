@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, Profile
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from rest_framework_extensions.mixins import NestedViewSetMixin
 from . import models
@@ -22,4 +21,3 @@ This viewset automatically provides `list`, `create`, `retrieve`,
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = models.Profile.objects.all()
     serializer_class = serializers.ProfileSerializer
-    permission_classes = [IsAuthenticated]
