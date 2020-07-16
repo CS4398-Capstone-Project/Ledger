@@ -1,47 +1,51 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from phonenumber_field.modelfields import PhoneNumberField
+
+
 # Create your models here.
 
-
-TYPE_CHOICES = (('1.', 'Patient'),( '2.', 'Doctor'))
 class Profile(models.Model):
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
     birth_date = models.DateField(null=True, blank=True)
-    registration_date = models.DateTimeField("date-registered")
     phone_number = PhoneNumberField(null=True)
-    type = models.CharField(default="Doctor or Patient?", max_length=50, choices=TYPE_CHOICES)
 
 
-    @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
+@receiver(post_save, sender=User)
+def create_user_profile(
+    sender,
+    instance,
+    created,
+    **kwargs
+    ):
+    if created:
+        Profile.objects.create(user=instance)
 
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 class Doctor(models.Model):
-     doctor_name = models.CharField(max_length = 50)
-     registration_date = models.DateTimeField("date-registered")
-     work = models.CharField(max_length = 50)
-class Patient(models.Model):
-     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-     patient_name = models.CharField(max_length=50)
-     registration_date = models.DateTimeField("date-registered")
 
-     # @property
-     # def is_waiting(self):
-     #     return bool(self.waiting_status)
-# class Appointment(models.Model):
-# 	user=models.ForeignKey(settings.AUTH_USER_MODEL,blank=True, null=True,on_delete=models.DO_NOTHING)
-# 	date=models.CharField(max_length=50)
-# 	time_start=models.CharField(max_length=50)
-# 	time_end=models.CharField(max_length=50)
-# 	appointment_with=models.CharField(max_length=50,blank=True)
-# 	update_time=models.DateField(auto_now=True, auto_now_add=False)
-#
+    doctor_name = models.CharField(max_length=50)
+    work = models.CharField(max_length=50)
+
+class Patient(models.Model):
+
+    profile = models.ForeignKey(Profile, null = True, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    registration_date = models.DateTimeField('date-registered')
+
+
+class Appointment(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    date = models.CharField(max_length=50)
+    time_start = models.CharField(max_length=50)
