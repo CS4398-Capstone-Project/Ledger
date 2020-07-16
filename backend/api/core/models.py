@@ -25,16 +25,24 @@ class Profile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.profile.save()
 
-# class Doctor(models.Model):
-#     doctor_name = models.CharField(max_length = 50)
+# class Appointment(models.Model):
+# 	user=models.ForeignKey(settings.AUTH_USER_MODEL,blank=True, null=True,on_delete=models.DO_NOTHING)
+# 	date=models.CharField(max_length=50)
+# 	time_start=models.CharField(max_length=50)
+# 	time_end=models.CharField(max_length=50)
+# 	appointment_with=models.CharField(max_length=50,blank=True)
+# 	update_time=models.DateField(auto_now=True, auto_now_add=False)
+#
+#  class Doctor(models.Model):
+#      doctor_name = models.CharField(max_length = 50)
 #     registration_date = models.DateTimeField("date-registered")
 #
 #
-# class Patient(models.Model):
+#  class Patient(models.Model):
 #     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
 #     patient_name = models.CharField(max_length=50)
 #     registration_date = models.DateTimeField("date-registered")
 #
-#     @property
-#     def is_waiting(self):
-#         return bool(self.waiting_status)
+#    @property
+#    def is_waiting(self):
+#        return bool(self.waiting_status)

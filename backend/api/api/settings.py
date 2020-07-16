@@ -25,7 +25,17 @@ SECRET_KEY = 'n33-tbrm=$s#_^mx9fh4nngz^_v9ys81cg8q-yy6_l!lfnxhh5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+REST_FRAMEWORK = {
+#    'DEFAULT_FILTER_BACKENDS': ("django_filters.rest_framework.DjangoFilterBackend"),
+     'DEFAULT_AUTHENTICATION_CLASSES': (
+     'rest_framework.authentication.TokenAuthentication'
+         ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 50,
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
 
 
 # Application definition
@@ -38,8 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'djoser',
     'phonenumber_field',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
