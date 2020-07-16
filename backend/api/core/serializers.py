@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User, Profile
+from django.contrib.auth.models import User, Profile, User, Doctor
 from rest_framework import serializers
 from . import models
 from . import serializers as serializer
@@ -29,3 +29,11 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Profile
         fields = ['user', 'bio', 'location', 'birth_date', 'date_registered','phone_number', 'type']
+class DoctorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Profile
+        fields = ['doctor_name', 'registration_date', 'work']
+class PatientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Profile
+        fields = [Doctor, 'patient_name', 'registration_date']
