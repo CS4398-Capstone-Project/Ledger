@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User, Group, Profile
+from django.contrib.auth.models import User, Group, Profile, Doctor, Patient
 from rest_framework import viewsets
 
 from rest_framework_extensions.mixins import NestedViewSetMixin
@@ -21,3 +21,9 @@ This viewset automatically provides `list`, `create`, `retrieve`,
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = models.Profile.objects.all()
     serializer_class = serializers.ProfileSerializer
+class DoctorViewSet(viewsets.ModelViewSet):
+    queryset = models.Doctor.objects.all()
+    serializer_class = serializers.DoctorSerializer
+class PatientViewSet(viewsets.ModelViewSet):
+    queryset = models.Patient.objects.all()
+    serializer_class = serializers.PatientSerializer
