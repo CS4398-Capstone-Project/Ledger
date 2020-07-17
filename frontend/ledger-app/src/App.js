@@ -18,8 +18,9 @@ function App() {
       <Route exact path='/' component={Home} />
       <Route exact path='/customer' component={Customer} />
       <Route exact path='/employee' component={Employee} />
-      <Route exact path='/admin' component={Admin} />      <Route exact path='/registration' component={Registration} />
-'
+      <Route exact path='/admin' component={Admin} />
+      <Route exact path='/registration' component={Registration} />
+
       {/* <Route component={Error} /> */}
 
     </>

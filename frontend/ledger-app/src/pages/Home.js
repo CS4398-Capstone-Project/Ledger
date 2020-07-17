@@ -25,7 +25,7 @@ class Home extends React.Component {
       let result = await res.json();
   
       if (result && result.success) {
-        UserStore.loading = false; /* user is logged in so his in already*/
+        UserStore.loading = false; /* user is logged in so they are in already*/
         UserStore.isLoggedIn = true;
         UserStore.username = result.username;
   
@@ -49,7 +49,7 @@ class Home extends React.Component {
   async doLogout() {
     
     try {
-      /*check if user is logined in or not by checking session*/
+      /*check if user is logged in or not by checking session*/
       let res = await fetch('/logout', {
         method: 'post',
         headers: {
