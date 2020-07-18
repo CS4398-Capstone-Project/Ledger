@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from django.contrib.auth.models import User, Profile, Patient, Doctor, Appointment
+from django.contrib.auth.models import User
 from rest_framework import serializers
-from  import models
-from  import serializers as serializer
+from . import models
+from . import serializers as serializer
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -42,7 +42,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = models.Appointment
-        fields = [Patient, Doctor, 'date', 'time_start']
+        fields = ['Patient', 'Doctor', 'date', 'time_start']
 
 
 class DoctorSerializer(serializers.ModelSerializer):
@@ -51,7 +51,7 @@ class DoctorSerializer(serializers.ModelSerializer):
 
         model = models.Profile
         fields = ['doctor_name', 'registration_date',
-                  'work'.Appointment]
+                  'work', 'Appointment']
 
 
 class PatientSerializer(serializers.ModelSerializer):
