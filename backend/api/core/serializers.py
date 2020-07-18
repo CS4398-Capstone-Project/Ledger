@@ -34,6 +34,12 @@ class ProfileSerializer(serializers.ModelSerializer):
             'birth_date',
             'date_registered',
             'phone_number',
+            'gender',
+            'address_1',
+            'address_2',
+            'city',
+            'state',
+            'zip_code'
             ]
 
 
@@ -49,9 +55,8 @@ class DoctorSerializer(serializers.ModelSerializer):
 
     class Meta:
 
-        model = models.Profile
-        fields = ['doctor_name', 'registration_date',
-                  'work', 'Appointment']
+        model = models.Doctor
+        fields = ['work']
 
 
 class PatientSerializer(serializers.ModelSerializer):
