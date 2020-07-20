@@ -1,0 +1,1586 @@
+openapi: 3.0.2
+info:
+  title: 'Ledger'
+  version: 1.0.0
+  description: An API used to run an appointment management system
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: adc129@txstate.edu
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+  - name: profile
+    description: Access to user profiles
+  - name: doctor
+    description: Doctors
+  - name: patient
+    description: patients
+  - name: user
+    description: user access
+    externalDocs:
+      description: Djoser docs
+      url: 'https://djoser.readthedocs.io/en/latest/base_endpoints.html'
+components:
+  securitySchemes:
+    ApiKeyAuth:        # arbitrary name for the security scheme
+      type: apiKey
+      in: header       # can be "header", "query" or "cookie"
+      name: Authorization token  # name of the header, query parameter or cookie
+paths:
+  /api/v1/profile/:
+    get:
+      operationId: listProfiles
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        user:
+                          type: integer
+                        bio:
+                          type: string
+                          maxLength: 500
+                        birth_date:
+                          type: string
+                          format: date
+                          nullable: true
+                        date_registered:
+                          type: string
+                          nullable: true
+                          maxLength: 50
+                        phone_number:
+                          type: string
+                          nullable: true
+                          maxLength: 128
+                        gender:
+                          enum:
+                          - '1'
+                          - '2'
+                        address_1:
+                          type: string
+                          maxLength: 128
+                        address_2:
+                          type: string
+                          maxLength: 128
+                        city:
+                          type: string
+                          maxLength: 64
+                        state:
+                          enum:
+                          - AL
+                          - AK
+                          - AS
+                          - AZ
+                          - AR
+                          - AA
+                          - AE
+                          - AP
+                          - CA
+                          - CO
+                          - CT
+                          - DE
+                          - DC
+                          - FL
+                          - GA
+                          - GU
+                          - HI
+                          - ID
+                          - IL
+                          - IN
+                          - IA
+                          - KS
+                          - KY
+                          - LA
+                          - ME
+                          - MD
+                          - MA
+                          - MI
+                          - MN
+                          - MS
+                          - MO
+                          - MT
+                          - NE
+                          - NV
+                          - NH
+                          - NJ
+                          - NM
+                          - NY
+                          - NC
+                          - ND
+                          - MP
+                          - OH
+                          - OK
+                          - OR
+                          - PA
+                          - PR
+                          - RI
+                          - SC
+                          - SD
+                          - TN
+                          - TX
+                          - UT
+                          - VT
+                          - VI
+                          - VA
+                          - WA
+                          - WV
+                          - WI
+                          - WY
+                        zip_code:
+                          type: string
+                          maxLength: 5
+                      required:
+                      - user
+          description: ''
+    post:
+      operationId: createProfile
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id001
+              properties:
+                user:
+                  type: integer
+                bio:
+                  type: string
+                  maxLength: 500
+                birth_date:
+                  type: string
+                  format: date
+                  nullable: true
+                date_registered:
+                  type: string
+                  nullable: true
+                  maxLength: 50
+                phone_number:
+                  type: string
+                  nullable: true
+                  maxLength: 128
+                gender:
+                  enum:
+                  - '1'
+                  - '2'
+                address_1:
+                  type: string
+                  maxLength: 128
+                address_2:
+                  type: string
+                  maxLength: 128
+                city:
+                  type: string
+                  maxLength: 64
+                state:
+                  enum:
+                  - AL
+                  - AK
+                  - AS
+                  - AZ
+                  - AR
+                  - AA
+                  - AE
+                  - AP
+                  - CA
+                  - CO
+                  - CT
+                  - DE
+                  - DC
+                  - FL
+                  - GA
+                  - GU
+                  - HI
+                  - ID
+                  - IL
+                  - IN
+                  - IA
+                  - KS
+                  - KY
+                  - LA
+                  - ME
+                  - MD
+                  - MA
+                  - MI
+                  - MN
+                  - MS
+                  - MO
+                  - MT
+                  - NE
+                  - NV
+                  - NH
+                  - NJ
+                  - NM
+                  - NY
+                  - NC
+                  - ND
+                  - MP
+                  - OH
+                  - OK
+                  - OR
+                  - PA
+                  - PR
+                  - RI
+                  - SC
+                  - SD
+                  - TN
+                  - TX
+                  - UT
+                  - VT
+                  - VI
+                  - VA
+                  - WA
+                  - WV
+                  - WI
+                  - WY
+                zip_code:
+                  type: string
+                  maxLength: 5
+              required:
+              - user
+          application/x-www-form-urlencoded:
+            schema: *id001
+          multipart/form-data:
+            schema: *id001
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  user:
+                    type: integer
+                  bio:
+                    type: string
+                    maxLength: 500
+                  birth_date:
+                    type: string
+                    format: date
+                    nullable: true
+                  date_registered:
+                    type: string
+                    nullable: true
+                    maxLength: 50
+                  phone_number:
+                    type: string
+                    nullable: true
+                    maxLength: 128
+                  gender:
+                    enum:
+                    - '1'
+                    - '2'
+                  address_1:
+                    type: string
+                    maxLength: 128
+                  address_2:
+                    type: string
+                    maxLength: 128
+                  city:
+                    type: string
+                    maxLength: 64
+                  state:
+                    enum:
+                    - AL
+                    - AK
+                    - AS
+                    - AZ
+                    - AR
+                    - AA
+                    - AE
+                    - AP
+                    - CA
+                    - CO
+                    - CT
+                    - DE
+                    - DC
+                    - FL
+                    - GA
+                    - GU
+                    - HI
+                    - ID
+                    - IL
+                    - IN
+                    - IA
+                    - KS
+                    - KY
+                    - LA
+                    - ME
+                    - MD
+                    - MA
+                    - MI
+                    - MN
+                    - MS
+                    - MO
+                    - MT
+                    - NE
+                    - NV
+                    - NH
+                    - NJ
+                    - NM
+                    - NY
+                    - NC
+                    - ND
+                    - MP
+                    - OH
+                    - OK
+                    - OR
+                    - PA
+                    - PR
+                    - RI
+                    - SC
+                    - SD
+                    - TN
+                    - TX
+                    - UT
+                    - VT
+                    - VI
+                    - VA
+                    - WA
+                    - WV
+                    - WI
+                    - WY
+                  zip_code:
+                    type: string
+                    maxLength: 5
+                required:
+                - user
+          description: ''
+  /api/v1/profile/{id}/:
+    get:
+      operationId: retrieveProfile
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this profile.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  user:
+                    type: integer
+                  bio:
+                    type: string
+                    maxLength: 500
+                  birth_date:
+                    type: string
+                    format: date
+                    nullable: true
+                  date_registered:
+                    type: string
+                    nullable: true
+                    maxLength: 50
+                  phone_number:
+                    type: string
+                    nullable: true
+                    maxLength: 128
+                  gender:
+                    enum:
+                    - '1'
+                    - '2'
+                  address_1:
+                    type: string
+                    maxLength: 128
+                  address_2:
+                    type: string
+                    maxLength: 128
+                  city:
+                    type: string
+                    maxLength: 64
+                  state:
+                    enum:
+                    - AL
+                    - AK
+                    - AS
+                    - AZ
+                    - AR
+                    - AA
+                    - AE
+                    - AP
+                    - CA
+                    - CO
+                    - CT
+                    - DE
+                    - DC
+                    - FL
+                    - GA
+                    - GU
+                    - HI
+                    - ID
+                    - IL
+                    - IN
+                    - IA
+                    - KS
+                    - KY
+                    - LA
+                    - ME
+                    - MD
+                    - MA
+                    - MI
+                    - MN
+                    - MS
+                    - MO
+                    - MT
+                    - NE
+                    - NV
+                    - NH
+                    - NJ
+                    - NM
+                    - NY
+                    - NC
+                    - ND
+                    - MP
+                    - OH
+                    - OK
+                    - OR
+                    - PA
+                    - PR
+                    - RI
+                    - SC
+                    - SD
+                    - TN
+                    - TX
+                    - UT
+                    - VT
+                    - VI
+                    - VA
+                    - WA
+                    - WV
+                    - WI
+                    - WY
+                  zip_code:
+                    type: string
+                    maxLength: 5
+                required:
+                - user
+          description: ''
+    put:
+      operationId: updateProfile
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this profile.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id002
+              properties:
+                user:
+                  type: integer
+                bio:
+                  type: string
+                  maxLength: 500
+                birth_date:
+                  type: string
+                  format: date
+                  nullable: true
+                date_registered:
+                  type: string
+                  nullable: true
+                  maxLength: 50
+                phone_number:
+                  type: string
+                  nullable: true
+                  maxLength: 128
+                gender:
+                  enum:
+                  - '1'
+                  - '2'
+                address_1:
+                  type: string
+                  maxLength: 128
+                address_2:
+                  type: string
+                  maxLength: 128
+                city:
+                  type: string
+                  maxLength: 64
+                state:
+                  enum:
+                  - AL
+                  - AK
+                  - AS
+                  - AZ
+                  - AR
+                  - AA
+                  - AE
+                  - AP
+                  - CA
+                  - CO
+                  - CT
+                  - DE
+                  - DC
+                  - FL
+                  - GA
+                  - GU
+                  - HI
+                  - ID
+                  - IL
+                  - IN
+                  - IA
+                  - KS
+                  - KY
+                  - LA
+                  - ME
+                  - MD
+                  - MA
+                  - MI
+                  - MN
+                  - MS
+                  - MO
+                  - MT
+                  - NE
+                  - NV
+                  - NH
+                  - NJ
+                  - NM
+                  - NY
+                  - NC
+                  - ND
+                  - MP
+                  - OH
+                  - OK
+                  - OR
+                  - PA
+                  - PR
+                  - RI
+                  - SC
+                  - SD
+                  - TN
+                  - TX
+                  - UT
+                  - VT
+                  - VI
+                  - VA
+                  - WA
+                  - WV
+                  - WI
+                  - WY
+                zip_code:
+                  type: string
+                  maxLength: 5
+              required:
+              - user
+          application/x-www-form-urlencoded:
+            schema: *id002
+          multipart/form-data:
+            schema: *id002
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  user:
+                    type: integer
+                  bio:
+                    type: string
+                    maxLength: 500
+                  birth_date:
+                    type: string
+                    format: date
+                    nullable: true
+                  date_registered:
+                    type: string
+                    nullable: true
+                    maxLength: 50
+                  phone_number:
+                    type: string
+                    nullable: true
+                    maxLength: 128
+                  gender:
+                    enum:
+                    - '1'
+                    - '2'
+                  address_1:
+                    type: string
+                    maxLength: 128
+                  address_2:
+                    type: string
+                    maxLength: 128
+                  city:
+                    type: string
+                    maxLength: 64
+                  state:
+                    enum:
+                    - AL
+                    - AK
+                    - AS
+                    - AZ
+                    - AR
+                    - AA
+                    - AE
+                    - AP
+                    - CA
+                    - CO
+                    - CT
+                    - DE
+                    - DC
+                    - FL
+                    - GA
+                    - GU
+                    - HI
+                    - ID
+                    - IL
+                    - IN
+                    - IA
+                    - KS
+                    - KY
+                    - LA
+                    - ME
+                    - MD
+                    - MA
+                    - MI
+                    - MN
+                    - MS
+                    - MO
+                    - MT
+                    - NE
+                    - NV
+                    - NH
+                    - NJ
+                    - NM
+                    - NY
+                    - NC
+                    - ND
+                    - MP
+                    - OH
+                    - OK
+                    - OR
+                    - PA
+                    - PR
+                    - RI
+                    - SC
+                    - SD
+                    - TN
+                    - TX
+                    - UT
+                    - VT
+                    - VI
+                    - VA
+                    - WA
+                    - WV
+                    - WI
+                    - WY
+                  zip_code:
+                    type: string
+                    maxLength: 5
+                required:
+                - user
+          description: ''
+    patch:
+      operationId: partial_updateProfile
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this profile.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id003
+              properties:
+                user:
+                  type: integer
+                bio:
+                  type: string
+                  maxLength: 500
+                birth_date:
+                  type: string
+                  format: date
+                  nullable: true
+                date_registered:
+                  type: string
+                  nullable: true
+                  maxLength: 50
+                phone_number:
+                  type: string
+                  nullable: true
+                  maxLength: 128
+                gender:
+                  enum:
+                  - '1'
+                  - '2'
+                address_1:
+                  type: string
+                  maxLength: 128
+                address_2:
+                  type: string
+                  maxLength: 128
+                city:
+                  type: string
+                  maxLength: 64
+                state:
+                  enum:
+                  - AL
+                  - AK
+                  - AS
+                  - AZ
+                  - AR
+                  - AA
+                  - AE
+                  - AP
+                  - CA
+                  - CO
+                  - CT
+                  - DE
+                  - DC
+                  - FL
+                  - GA
+                  - GU
+                  - HI
+                  - ID
+                  - IL
+                  - IN
+                  - IA
+                  - KS
+                  - KY
+                  - LA
+                  - ME
+                  - MD
+                  - MA
+                  - MI
+                  - MN
+                  - MS
+                  - MO
+                  - MT
+                  - NE
+                  - NV
+                  - NH
+                  - NJ
+                  - NM
+                  - NY
+                  - NC
+                  - ND
+                  - MP
+                  - OH
+                  - OK
+                  - OR
+                  - PA
+                  - PR
+                  - RI
+                  - SC
+                  - SD
+                  - TN
+                  - TX
+                  - UT
+                  - VT
+                  - VI
+                  - VA
+                  - WA
+                  - WV
+                  - WI
+                  - WY
+                zip_code:
+                  type: string
+                  maxLength: 5
+          application/x-www-form-urlencoded:
+            schema: *id003
+          multipart/form-data:
+            schema: *id003
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  user:
+                    type: integer
+                  bio:
+                    type: string
+                    maxLength: 500
+                  birth_date:
+                    type: string
+                    format: date
+                    nullable: true
+                  date_registered:
+                    type: string
+                    nullable: true
+                    maxLength: 50
+                  phone_number:
+                    type: string
+                    nullable: true
+                    maxLength: 128
+                  gender:
+                    enum:
+                    - '1'
+                    - '2'
+                  address_1:
+                    type: string
+                    maxLength: 128
+                  address_2:
+                    type: string
+                    maxLength: 128
+                  city:
+                    type: string
+                    maxLength: 64
+                  state:
+                    enum:
+                    - AL
+                    - AK
+                    - AS
+                    - AZ
+                    - AR
+                    - AA
+                    - AE
+                    - AP
+                    - CA
+                    - CO
+                    - CT
+                    - DE
+                    - DC
+                    - FL
+                    - GA
+                    - GU
+                    - HI
+                    - ID
+                    - IL
+                    - IN
+                    - IA
+                    - KS
+                    - KY
+                    - LA
+                    - ME
+                    - MD
+                    - MA
+                    - MI
+                    - MN
+                    - MS
+                    - MO
+                    - MT
+                    - NE
+                    - NV
+                    - NH
+                    - NJ
+                    - NM
+                    - NY
+                    - NC
+                    - ND
+                    - MP
+                    - OH
+                    - OK
+                    - OR
+                    - PA
+                    - PR
+                    - RI
+                    - SC
+                    - SD
+                    - TN
+                    - TX
+                    - UT
+                    - VT
+                    - VI
+                    - VA
+                    - WA
+                    - WV
+                    - WI
+                    - WY
+                  zip_code:
+                    type: string
+                    maxLength: 5
+                required:
+                - user
+          description: ''
+    delete:
+      operationId: destroyProfile
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this profile.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /api/auth/users/:
+    get:
+      operationId: listUsers
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        email:
+                          type: string
+                          format: email
+                          maxLength: 254
+                        id:
+                          type: integer
+                          readOnly: true
+                        username:
+                          type: string
+                          readOnly: true
+                          description: Required. 150 characters or fewer. Letters,
+                            digits and @/./+/-/_ only.
+          description: ''
+    post:
+      operationId: createUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id004
+              properties:
+                email:
+                  type: string
+                  format: email
+                  maxLength: 254
+                username:
+                  type: string
+                  description: Required. 150 characters or fewer. Letters, digits
+                    and @/./+/-/_ only.
+                  pattern: ^[\w.@+-]+\Z
+                  maxLength: 150
+                password:
+                  type: string
+                  writeOnly: true
+              required:
+              - username
+              - password
+          application/x-www-form-urlencoded:
+            schema: *id004
+          multipart/form-data:
+            schema: *id004
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+\Z
+                    maxLength: 150
+                  id:
+                    type: integer
+                    readOnly: true
+                required:
+                - username
+          description: ''
+  /api/auth/users/me/:
+    get:
+      operationId: meUser
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  id:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    readOnly: true
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+          description: ''
+    put:
+      operationId: meUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id005
+              properties:
+                email:
+                  type: string
+                  format: email
+                  maxLength: 254
+          application/x-www-form-urlencoded:
+            schema: *id005
+          multipart/form-data:
+            schema: *id005
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  id:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    readOnly: true
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+          description: ''
+    patch:
+      operationId: meUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id006
+              properties:
+                email:
+                  type: string
+                  format: email
+                  maxLength: 254
+          application/x-www-form-urlencoded:
+            schema: *id006
+          multipart/form-data:
+            schema: *id006
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  id:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    readOnly: true
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+          description: ''
+    delete:
+      operationId: meUser
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+  /api/auth/users/{id}/:
+    get:
+      operationId: retrieveUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  id:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    readOnly: true
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+          description: ''
+    put:
+      operationId: updateUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id007
+              properties:
+                email:
+                  type: string
+                  format: email
+                  maxLength: 254
+          application/x-www-form-urlencoded:
+            schema: *id007
+          multipart/form-data:
+            schema: *id007
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  id:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    readOnly: true
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+          description: ''
+    patch:
+      operationId: partial_updateUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id008
+              properties:
+                email:
+                  type: string
+                  format: email
+                  maxLength: 254
+          application/x-www-form-urlencoded:
+            schema: *id008
+          multipart/form-data:
+            schema: *id008
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  id:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    readOnly: true
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+          description: ''
+    delete:
+      operationId: destroyUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /api/auth/users/activation/:
+    post:
+      operationId: activationUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id009
+              properties:
+                uid:
+                  type: string
+                token:
+                  type: string
+              required:
+              - uid
+              - token
+          application/x-www-form-urlencoded:
+            schema: *id009
+          multipart/form-data:
+            schema: *id009
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  uid:
+                    type: string
+                  token:
+                    type: string
+                required:
+                - uid
+                - token
+          description: ''
+  /api/auth/users/resend_activation/:
+    post:
+      operationId: resend_activationUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id010
+              properties:
+                email:
+                  type: string
+                  format: email
+              required:
+              - email
+          application/x-www-form-urlencoded:
+            schema: *id010
+          multipart/form-data:
+            schema: *id010
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  email:
+                    type: string
+                    format: email
+                required:
+                - email
+          description: ''
+  /api/auth/users/reset_password/:
+    post:
+      operationId: reset_passwordUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id011
+              properties:
+                email:
+                  type: string
+                  format: email
+              required:
+              - email
+          application/x-www-form-urlencoded:
+            schema: *id011
+          multipart/form-data:
+            schema: *id011
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  email:
+                    type: string
+                    format: email
+                required:
+                - email
+          description: ''
+  /api/auth/users/reset_password_confirm/:
+    post:
+      operationId: reset_password_confirmUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id012
+              properties:
+                uid:
+                  type: string
+                token:
+                  type: string
+                new_password:
+                  type: string
+              required:
+              - uid
+              - token
+              - new_password
+          application/x-www-form-urlencoded:
+            schema: *id012
+          multipart/form-data:
+            schema: *id012
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  uid:
+                    type: string
+                  token:
+                    type: string
+                  new_password:
+                    type: string
+                required:
+                - uid
+                - token
+                - new_password
+          description: ''
+  /api/auth/users/reset_username/:
+    post:
+      operationId: reset_usernameUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id013
+              properties:
+                email:
+                  type: string
+                  format: email
+              required:
+              - email
+          application/x-www-form-urlencoded:
+            schema: *id013
+          multipart/form-data:
+            schema: *id013
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  email:
+                    type: string
+                    format: email
+                required:
+                - email
+          description: ''
+  /api/auth/users/reset_username_confirm/:
+    post:
+      operationId: reset_username_confirmUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id014
+              properties:
+                new_username:
+                  type: string
+                  description: Required. 150 characters or fewer. Letters, digits
+                    and @/./+/-/_ only.
+                  pattern: ^[\w.@+-]+\Z
+                  maxLength: 150
+              required:
+              - new_username
+          application/x-www-form-urlencoded:
+            schema: *id014
+          multipart/form-data:
+            schema: *id014
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  new_username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+\Z
+                    maxLength: 150
+                required:
+                - new_username
+          description: ''
+  /api/auth/users/set_password/:
+    post:
+      operationId: set_passwordUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id015
+              properties:
+                new_password:
+                  type: string
+                current_password:
+                  type: string
+              required:
+              - new_password
+              - current_password
+          application/x-www-form-urlencoded:
+            schema: *id015
+          multipart/form-data:
+            schema: *id015
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  new_password:
+                    type: string
+                  current_password:
+                    type: string
+                required:
+                - new_password
+                - current_password
+          description: ''
+  /api/auth/users/set_username/:
+    post:
+      operationId: set_usernameUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id016
+              properties:
+                new_username:
+                  type: string
+                  description: Required. 150 characters or fewer. Letters, digits
+                    and @/./+/-/_ only.
+                  pattern: ^[\w.@+-]+\Z
+                  maxLength: 150
+              required:
+              - new_username
+          application/x-www-form-urlencoded:
+            schema: *id016
+          multipart/form-data:
+            schema: *id016
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  new_username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+\Z
+                    maxLength: 150
+                required:
+                - new_username
+          description: ''
+  /api/auth/token/login/:
+    post:
+      operationId: CreateTokenCreate
+      description: Use this endpoint to obtain user authentication token.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id017
+              properties:
+                password:
+                  type: string
+                username:
+                  type: string
+          application/x-www-form-urlencoded:
+            schema: *id017
+          multipart/form-data:
+            schema: *id017
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  password:
+                    type: string
+                  username:
+                    type: string
+          description: ''
+  /api/auth/token/logout/:
+    post:
+      operationId: CreateTokenDestroy
+      description: Use this endpoint to logout user (remove user authentication token).
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
