@@ -30,7 +30,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = [
             'user',
             'bio',
-            'location',
             'birth_date',
             'date_registered',
             'phone_number',
@@ -64,4 +63,4 @@ class PatientSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = models.Patient
-        fields = ['patient_name', 'registration_date']
+        fields = ['profile', 'doctor']

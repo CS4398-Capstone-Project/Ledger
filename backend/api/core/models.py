@@ -19,6 +19,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
     birth_date = models.DateField(null=True, blank=True)
+    date_registered = models.DateField(null=True, blank=True)
     phone_number = PhoneNumberField(null=True)
     gender = models.CharField(default="Choose Gender", max_length=50, choices=TYPE_CHOICES)
     address_1 = models.CharField(("address"), max_length=128, default="")

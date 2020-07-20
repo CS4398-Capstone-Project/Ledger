@@ -28,10 +28,354 @@ components:
       in: header       # can be "header", "query" or "cookie"
       name: Authorization token  # name of the header, query parameter or cookie
 paths:
+  /api/v1/profile/:
+    get:
+      operationId: listProfiles
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        user:
+                          type: integer
+                        bio:
+                          type: string
+                          maxLength: 500
+                        birth_date:
+                          type: string
+                          format: date
+                          nullable: true
+                        date_registered:
+                          type: string
+                          nullable: true
+                          maxLength: 50
+                        phone_number:
+                          type: string
+                          nullable: true
+                          maxLength: 128
+                        gender:
+                          enum:
+                          - '1'
+                          - '2'
+                        address_1:
+                          type: string
+                          maxLength: 128
+                        address_2:
+                          type: string
+                          maxLength: 128
+                        city:
+                          type: string
+                          maxLength: 64
+                        state:
+                          enum:
+                          - AL
+                          - AK
+                          - AS
+                          - AZ
+                          - AR
+                          - AA
+                          - AE
+                          - AP
+                          - CA
+                          - CO
+                          - CT
+                          - DE
+                          - DC
+                          - FL
+                          - GA
+                          - GU
+                          - HI
+                          - ID
+                          - IL
+                          - IN
+                          - IA
+                          - KS
+                          - KY
+                          - LA
+                          - ME
+                          - MD
+                          - MA
+                          - MI
+                          - MN
+                          - MS
+                          - MO
+                          - MT
+                          - NE
+                          - NV
+                          - NH
+                          - NJ
+                          - NM
+                          - NY
+                          - NC
+                          - ND
+                          - MP
+                          - OH
+                          - OK
+                          - OR
+                          - PA
+                          - PR
+                          - RI
+                          - SC
+                          - SD
+                          - TN
+                          - TX
+                          - UT
+                          - VT
+                          - VI
+                          - VA
+                          - WA
+                          - WV
+                          - WI
+                          - WY
+                        zip_code:
+                          type: string
+                          maxLength: 5
+                      required:
+                      - user
+          description: ''
+    post:
+      operationId: createProfile
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id001
+              properties:
+                user:
+                  type: integer
+                bio:
+                  type: string
+                  maxLength: 500
+                birth_date:
+                  type: string
+                  format: date
+                  nullable: true
+                date_registered:
+                  type: string
+                  nullable: true
+                  maxLength: 50
+                phone_number:
+                  type: string
+                  nullable: true
+                  maxLength: 128
+                gender:
+                  enum:
+                  - '1'
+                  - '2'
+                address_1:
+                  type: string
+                  maxLength: 128
+                address_2:
+                  type: string
+                  maxLength: 128
+                city:
+                  type: string
+                  maxLength: 64
+                state:
+                  enum:
+                  - AL
+                  - AK
+                  - AS
+                  - AZ
+                  - AR
+                  - AA
+                  - AE
+                  - AP
+                  - CA
+                  - CO
+                  - CT
+                  - DE
+                  - DC
+                  - FL
+                  - GA
+                  - GU
+                  - HI
+                  - ID
+                  - IL
+                  - IN
+                  - IA
+                  - KS
+                  - KY
+                  - LA
+                  - ME
+                  - MD
+                  - MA
+                  - MI
+                  - MN
+                  - MS
+                  - MO
+                  - MT
+                  - NE
+                  - NV
+                  - NH
+                  - NJ
+                  - NM
+                  - NY
+                  - NC
+                  - ND
+                  - MP
+                  - OH
+                  - OK
+                  - OR
+                  - PA
+                  - PR
+                  - RI
+                  - SC
+                  - SD
+                  - TN
+                  - TX
+                  - UT
+                  - VT
+                  - VI
+                  - VA
+                  - WA
+                  - WV
+                  - WI
+                  - WY
+                zip_code:
+                  type: string
+                  maxLength: 5
+              required:
+              - user
+          application/x-www-form-urlencoded:
+            schema: *id001
+          multipart/form-data:
+            schema: *id001
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  user:
+                    type: integer
+                  bio:
+                    type: string
+                    maxLength: 500
+                  birth_date:
+                    type: string
+                    format: date
+                    nullable: true
+                  date_registered:
+                    type: string
+                    nullable: true
+                    maxLength: 50
+                  phone_number:
+                    type: string
+                    nullable: true
+                    maxLength: 128
+                  gender:
+                    enum:
+                    - '1'
+                    - '2'
+                  address_1:
+                    type: string
+                    maxLength: 128
+                  address_2:
+                    type: string
+                    maxLength: 128
+                  city:
+                    type: string
+                    maxLength: 64
+                  state:
+                    enum:
+                    - AL
+                    - AK
+                    - AS
+                    - AZ
+                    - AR
+                    - AA
+                    - AE
+                    - AP
+                    - CA
+                    - CO
+                    - CT
+                    - DE
+                    - DC
+                    - FL
+                    - GA
+                    - GU
+                    - HI
+                    - ID
+                    - IL
+                    - IN
+                    - IA
+                    - KS
+                    - KY
+                    - LA
+                    - ME
+                    - MD
+                    - MA
+                    - MI
+                    - MN
+                    - MS
+                    - MO
+                    - MT
+                    - NE
+                    - NV
+                    - NH
+                    - NJ
+                    - NM
+                    - NY
+                    - NC
+                    - ND
+                    - MP
+                    - OH
+                    - OK
+                    - OR
+                    - PA
+                    - PR
+                    - RI
+                    - SC
+                    - SD
+                    - TN
+                    - TX
+                    - UT
+                    - VT
+                    - VI
+                    - VA
+                    - WA
+                    - WV
+                    - WI
+                    - WY
+                  zip_code:
+                    type: string
+                    maxLength: 5
+                required:
+                - user
+          description: ''
   /api/v1/profile/{id}/:
     get:
-      tags:
-      - profile
       operationId: retrieveProfile
       description: ''
       parameters:
@@ -56,14 +400,95 @@ paths:
                     type: string
                     format: date
                     nullable: true
+                  date_registered:
+                    type: string
+                    nullable: true
+                    maxLength: 50
                   phone_number:
-                    type: integer
+                    type: string
+                    nullable: true
+                    maxLength: 128
+                  gender:
+                    enum:
+                    - '1'
+                    - '2'
+                  address_1:
+                    type: string
+                    maxLength: 128
+                  address_2:
+                    type: string
+                    maxLength: 128
+                  city:
+                    type: string
+                    maxLength: 64
+                  state:
+                    enum:
+                    - AL
+                    - AK
+                    - AS
+                    - AZ
+                    - AR
+                    - AA
+                    - AE
+                    - AP
+                    - CA
+                    - CO
+                    - CT
+                    - DE
+                    - DC
+                    - FL
+                    - GA
+                    - GU
+                    - HI
+                    - ID
+                    - IL
+                    - IN
+                    - IA
+                    - KS
+                    - KY
+                    - LA
+                    - ME
+                    - MD
+                    - MA
+                    - MI
+                    - MN
+                    - MS
+                    - MO
+                    - MT
+                    - NE
+                    - NV
+                    - NH
+                    - NJ
+                    - NM
+                    - NY
+                    - NC
+                    - ND
+                    - MP
+                    - OH
+                    - OK
+                    - OR
+                    - PA
+                    - PR
+                    - RI
+                    - SC
+                    - SD
+                    - TN
+                    - TX
+                    - UT
+                    - VT
+                    - VI
+                    - VA
+                    - WA
+                    - WV
+                    - WI
+                    - WY
+                  zip_code:
+                    type: string
+                    maxLength: 5
                 required:
                 - user
           description: ''
     put:
-      tags:
-      - profile
       operationId: updateProfile
       description: ''
       parameters:
@@ -83,15 +508,95 @@ paths:
                 bio:
                   type: string
                   maxLength: 500
-                location:
-                  type: string
-                  maxLength: 30
                 birth_date:
                   type: string
                   format: date
                   nullable: true
+                date_registered:
+                  type: string
+                  nullable: true
+                  maxLength: 50
                 phone_number:
-                  type: integer
+                  type: string
+                  nullable: true
+                  maxLength: 128
+                gender:
+                  enum:
+                  - '1'
+                  - '2'
+                address_1:
+                  type: string
+                  maxLength: 128
+                address_2:
+                  type: string
+                  maxLength: 128
+                city:
+                  type: string
+                  maxLength: 64
+                state:
+                  enum:
+                  - AL
+                  - AK
+                  - AS
+                  - AZ
+                  - AR
+                  - AA
+                  - AE
+                  - AP
+                  - CA
+                  - CO
+                  - CT
+                  - DE
+                  - DC
+                  - FL
+                  - GA
+                  - GU
+                  - HI
+                  - ID
+                  - IL
+                  - IN
+                  - IA
+                  - KS
+                  - KY
+                  - LA
+                  - ME
+                  - MD
+                  - MA
+                  - MI
+                  - MN
+                  - MS
+                  - MO
+                  - MT
+                  - NE
+                  - NV
+                  - NH
+                  - NJ
+                  - NM
+                  - NY
+                  - NC
+                  - ND
+                  - MP
+                  - OH
+                  - OK
+                  - OR
+                  - PA
+                  - PR
+                  - RI
+                  - SC
+                  - SD
+                  - TN
+                  - TX
+                  - UT
+                  - VT
+                  - VI
+                  - VA
+                  - WA
+                  - WV
+                  - WI
+                  - WY
+                zip_code:
+                  type: string
+                  maxLength: 5
               required:
               - user
           application/x-www-form-urlencoded:
@@ -109,21 +614,99 @@ paths:
                   bio:
                     type: string
                     maxLength: 500
-                  location:
-                    type: string
-                    maxLength: 30
                   birth_date:
                     type: string
                     format: date
                     nullable: true
+                  date_registered:
+                    type: string
+                    nullable: true
+                    maxLength: 50
                   phone_number:
-                    type: integer
+                    type: string
+                    nullable: true
+                    maxLength: 128
+                  gender:
+                    enum:
+                    - '1'
+                    - '2'
+                  address_1:
+                    type: string
+                    maxLength: 128
+                  address_2:
+                    type: string
+                    maxLength: 128
+                  city:
+                    type: string
+                    maxLength: 64
+                  state:
+                    enum:
+                    - AL
+                    - AK
+                    - AS
+                    - AZ
+                    - AR
+                    - AA
+                    - AE
+                    - AP
+                    - CA
+                    - CO
+                    - CT
+                    - DE
+                    - DC
+                    - FL
+                    - GA
+                    - GU
+                    - HI
+                    - ID
+                    - IL
+                    - IN
+                    - IA
+                    - KS
+                    - KY
+                    - LA
+                    - ME
+                    - MD
+                    - MA
+                    - MI
+                    - MN
+                    - MS
+                    - MO
+                    - MT
+                    - NE
+                    - NV
+                    - NH
+                    - NJ
+                    - NM
+                    - NY
+                    - NC
+                    - ND
+                    - MP
+                    - OH
+                    - OK
+                    - OR
+                    - PA
+                    - PR
+                    - RI
+                    - SC
+                    - SD
+                    - TN
+                    - TX
+                    - UT
+                    - VT
+                    - VI
+                    - VA
+                    - WA
+                    - WV
+                    - WI
+                    - WY
+                  zip_code:
+                    type: string
+                    maxLength: 5
                 required:
                 - user
           description: ''
     patch:
-      tags:
-      - profile
       operationId: partial_updateProfile
       description: ''
       parameters:
@@ -143,15 +726,95 @@ paths:
                 bio:
                   type: string
                   maxLength: 500
-                location:
-                  type: string
-                  maxLength: 30
                 birth_date:
                   type: string
                   format: date
                   nullable: true
+                date_registered:
+                  type: string
+                  nullable: true
+                  maxLength: 50
                 phone_number:
-                  type: integer
+                  type: string
+                  nullable: true
+                  maxLength: 128
+                gender:
+                  enum:
+                  - '1'
+                  - '2'
+                address_1:
+                  type: string
+                  maxLength: 128
+                address_2:
+                  type: string
+                  maxLength: 128
+                city:
+                  type: string
+                  maxLength: 64
+                state:
+                  enum:
+                  - AL
+                  - AK
+                  - AS
+                  - AZ
+                  - AR
+                  - AA
+                  - AE
+                  - AP
+                  - CA
+                  - CO
+                  - CT
+                  - DE
+                  - DC
+                  - FL
+                  - GA
+                  - GU
+                  - HI
+                  - ID
+                  - IL
+                  - IN
+                  - IA
+                  - KS
+                  - KY
+                  - LA
+                  - ME
+                  - MD
+                  - MA
+                  - MI
+                  - MN
+                  - MS
+                  - MO
+                  - MT
+                  - NE
+                  - NV
+                  - NH
+                  - NJ
+                  - NM
+                  - NY
+                  - NC
+                  - ND
+                  - MP
+                  - OH
+                  - OK
+                  - OR
+                  - PA
+                  - PR
+                  - RI
+                  - SC
+                  - SD
+                  - TN
+                  - TX
+                  - UT
+                  - VT
+                  - VI
+                  - VA
+                  - WA
+                  - WV
+                  - WI
+                  - WY
+                zip_code:
+                  type: string
+                  maxLength: 5
           application/x-www-form-urlencoded:
             schema: *id003
           multipart/form-data:
@@ -167,22 +830,113 @@ paths:
                   bio:
                     type: string
                     maxLength: 500
-                  location:
-                    type: string
-                    maxLength: 30
                   birth_date:
                     type: string
                     format: date
                     nullable: true
+                  date_registered:
+                    type: string
+                    nullable: true
+                    maxLength: 50
                   phone_number:
-                    type: integer
+                    type: string
+                    nullable: true
+                    maxLength: 128
+                  gender:
+                    enum:
+                    - '1'
+                    - '2'
+                  address_1:
+                    type: string
+                    maxLength: 128
+                  address_2:
+                    type: string
+                    maxLength: 128
+                  city:
+                    type: string
+                    maxLength: 64
+                  state:
+                    enum:
+                    - AL
+                    - AK
+                    - AS
+                    - AZ
+                    - AR
+                    - AA
+                    - AE
+                    - AP
+                    - CA
+                    - CO
+                    - CT
+                    - DE
+                    - DC
+                    - FL
+                    - GA
+                    - GU
+                    - HI
+                    - ID
+                    - IL
+                    - IN
+                    - IA
+                    - KS
+                    - KY
+                    - LA
+                    - ME
+                    - MD
+                    - MA
+                    - MI
+                    - MN
+                    - MS
+                    - MO
+                    - MT
+                    - NE
+                    - NV
+                    - NH
+                    - NJ
+                    - NM
+                    - NY
+                    - NC
+                    - ND
+                    - MP
+                    - OH
+                    - OK
+                    - OR
+                    - PA
+                    - PR
+                    - RI
+                    - SC
+                    - SD
+                    - TN
+                    - TX
+                    - UT
+                    - VT
+                    - VI
+                    - VA
+                    - WA
+                    - WV
+                    - WI
+                    - WY
+                  zip_code:
+                    type: string
+                    maxLength: 5
                 required:
                 - user
           description: ''
+    delete:
+      operationId: destroyProfile
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this profile.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
   /api/auth/users/:
     get:
-      tags:
-      - user
       operationId: listUsers
       description: ''
       parameters:
@@ -232,15 +986,13 @@ paths:
                             digits and @/./+/-/_ only.
           description: ''
     post:
-      tags:
-      - user
       operationId: createUser
       description: ''
       parameters: []
       requestBody:
         content:
           application/json:
-            schema: &id010
+            schema: &id004
               properties:
                 email:
                   type: string
@@ -259,9 +1011,9 @@ paths:
               - username
               - password
           application/x-www-form-urlencoded:
-            schema: *id010
+            schema: *id004
           multipart/form-data:
-            schema: *id010
+            schema: *id004
       responses:
         '200':
           content:
@@ -286,8 +1038,6 @@ paths:
           description: ''
   /api/auth/users/me/:
     get:
-      tags:
-      - user
       operationId: meUser
       description: ''
       parameters: []
@@ -311,24 +1061,22 @@ paths:
                       and @/./+/-/_ only.
           description: ''
     put:
-      tags:
-      - user
       operationId: meUser
       description: ''
       parameters: []
       requestBody:
         content:
           application/json:
-            schema: &id011
+            schema: &id005
               properties:
                 email:
                   type: string
                   format: email
                   maxLength: 254
           application/x-www-form-urlencoded:
-            schema: *id011
+            schema: *id005
           multipart/form-data:
-            schema: *id011
+            schema: *id005
       responses:
         '200':
           content:
@@ -349,24 +1097,22 @@ paths:
                       and @/./+/-/_ only.
           description: ''
     patch:
-      tags:
-      - user
       operationId: meUser
       description: ''
       parameters: []
       requestBody:
         content:
           application/json:
-            schema: &id012
+            schema: &id006
               properties:
                 email:
                   type: string
                   format: email
                   maxLength: 254
           application/x-www-form-urlencoded:
-            schema: *id012
+            schema: *id006
           multipart/form-data:
-            schema: *id012
+            schema: *id006
       responses:
         '200':
           content:
@@ -387,8 +1133,6 @@ paths:
                       and @/./+/-/_ only.
           description: ''
     delete:
-      tags:
-        - user
       operationId: meUser
       description: ''
       parameters: []
@@ -397,8 +1141,6 @@ paths:
           description: ''
   /api/auth/users/{id}/:
     get:
-      tags:
-      - user
       operationId: retrieveUser
       description: ''
       parameters:
@@ -428,8 +1170,6 @@ paths:
                       and @/./+/-/_ only.
           description: ''
     put:
-      tags:
-      - user
       operationId: updateUser
       description: ''
       parameters:
@@ -442,16 +1182,16 @@ paths:
       requestBody:
         content:
           application/json:
-            schema: &id013
+            schema: &id007
               properties:
                 email:
                   type: string
                   format: email
                   maxLength: 254
           application/x-www-form-urlencoded:
-            schema: *id013
+            schema: *id007
           multipart/form-data:
-            schema: *id013
+            schema: *id007
       responses:
         '200':
           content:
@@ -472,8 +1212,6 @@ paths:
                       and @/./+/-/_ only.
           description: ''
     patch:
-      tags:
-      - user
       operationId: partial_updateUser
       description: ''
       parameters:
@@ -486,16 +1224,16 @@ paths:
       requestBody:
         content:
           application/json:
-            schema: &id014
+            schema: &id008
               properties:
                 email:
                   type: string
                   format: email
                   maxLength: 254
           application/x-www-form-urlencoded:
-            schema: *id014
+            schema: *id008
           multipart/form-data:
-            schema: *id014
+            schema: *id008
       responses:
         '200':
           content:
@@ -516,8 +1254,6 @@ paths:
                       and @/./+/-/_ only.
           description: ''
     delete:
-      tags:
-        - user
       operationId: destroyUser
       description: ''
       parameters:
@@ -532,15 +1268,13 @@ paths:
           description: ''
   /api/auth/users/activation/:
     post:
-      tags:
-      - user
       operationId: activationUser
       description: ''
       parameters: []
       requestBody:
         content:
           application/json:
-            schema: &id015
+            schema: &id009
               properties:
                 uid:
                   type: string
@@ -550,9 +1284,9 @@ paths:
               - uid
               - token
           application/x-www-form-urlencoded:
-            schema: *id015
+            schema: *id009
           multipart/form-data:
-            schema: *id015
+            schema: *id009
       responses:
         '200':
           content:
@@ -569,15 +1303,13 @@ paths:
           description: ''
   /api/auth/users/resend_activation/:
     post:
-      tags:
-      - user
       operationId: resend_activationUser
       description: ''
       parameters: []
       requestBody:
         content:
           application/json:
-            schema: &id016
+            schema: &id010
               properties:
                 email:
                   type: string
@@ -585,9 +1317,9 @@ paths:
               required:
               - email
           application/x-www-form-urlencoded:
-            schema: *id016
+            schema: *id010
           multipart/form-data:
-            schema: *id016
+            schema: *id010
       responses:
         '200':
           content:
@@ -602,15 +1334,13 @@ paths:
           description: ''
   /api/auth/users/reset_password/:
     post:
-      tags:
-      - user
       operationId: reset_passwordUser
       description: ''
       parameters: []
       requestBody:
         content:
           application/json:
-            schema: &id017
+            schema: &id011
               properties:
                 email:
                   type: string
@@ -618,9 +1348,9 @@ paths:
               required:
               - email
           application/x-www-form-urlencoded:
-            schema: *id017
+            schema: *id011
           multipart/form-data:
-            schema: *id017
+            schema: *id011
       responses:
         '200':
           content:
@@ -635,15 +1365,13 @@ paths:
           description: ''
   /api/auth/users/reset_password_confirm/:
     post:
-      tags:
-      - user
       operationId: reset_password_confirmUser
       description: ''
       parameters: []
       requestBody:
         content:
           application/json:
-            schema: &id018
+            schema: &id012
               properties:
                 uid:
                   type: string
@@ -656,9 +1384,9 @@ paths:
               - token
               - new_password
           application/x-www-form-urlencoded:
-            schema: *id018
+            schema: *id012
           multipart/form-data:
-            schema: *id018
+            schema: *id012
       responses:
         '200':
           content:
@@ -678,15 +1406,13 @@ paths:
           description: ''
   /api/auth/users/reset_username/:
     post:
-      tags:
-      - user
       operationId: reset_usernameUser
       description: ''
       parameters: []
       requestBody:
         content:
           application/json:
-            schema: &id019
+            schema: &id013
               properties:
                 email:
                   type: string
@@ -694,9 +1420,9 @@ paths:
               required:
               - email
           application/x-www-form-urlencoded:
-            schema: *id019
+            schema: *id013
           multipart/form-data:
-            schema: *id019
+            schema: *id013
       responses:
         '200':
           content:
@@ -711,15 +1437,13 @@ paths:
           description: ''
   /api/auth/users/reset_username_confirm/:
     post:
-      tags:
-      - user
       operationId: reset_username_confirmUser
       description: ''
       parameters: []
       requestBody:
         content:
           application/json:
-            schema: &id020
+            schema: &id014
               properties:
                 new_username:
                   type: string
@@ -730,9 +1454,9 @@ paths:
               required:
               - new_username
           application/x-www-form-urlencoded:
-            schema: *id020
+            schema: *id014
           multipart/form-data:
-            schema: *id020
+            schema: *id014
       responses:
         '200':
           content:
@@ -750,15 +1474,13 @@ paths:
           description: ''
   /api/auth/users/set_password/:
     post:
-      tags:
-      - user
       operationId: set_passwordUser
       description: ''
       parameters: []
       requestBody:
         content:
           application/json:
-            schema: &id021
+            schema: &id015
               properties:
                 new_password:
                   type: string
@@ -768,9 +1490,9 @@ paths:
               - new_password
               - current_password
           application/x-www-form-urlencoded:
-            schema: *id021
+            schema: *id015
           multipart/form-data:
-            schema: *id021
+            schema: *id015
       responses:
         '200':
           content:
@@ -787,15 +1509,13 @@ paths:
           description: ''
   /api/auth/users/set_username/:
     post:
-      tags:
-      - user
       operationId: set_usernameUser
       description: ''
       parameters: []
       requestBody:
         content:
           application/json:
-            schema: &id022
+            schema: &id016
               properties:
                 new_username:
                   type: string
@@ -806,9 +1526,9 @@ paths:
               required:
               - new_username
           application/x-www-form-urlencoded:
-            schema: *id022
+            schema: *id016
           multipart/form-data:
-            schema: *id022
+            schema: *id016
       responses:
         '200':
           content:
@@ -826,24 +1546,22 @@ paths:
           description: ''
   /api/auth/token/login/:
     post:
-      tags:
-      - user
       operationId: CreateTokenCreate
       description: Use this endpoint to obtain user authentication token.
       parameters: []
       requestBody:
         content:
           application/json:
-            schema: &id023
+            schema: &id017
               properties:
                 password:
                   type: string
                 username:
                   type: string
           application/x-www-form-urlencoded:
-            schema: *id023
+            schema: *id017
           multipart/form-data:
-            schema: *id023
+            schema: *id017
       responses:
         '200':
           content:
@@ -857,8 +1575,6 @@ paths:
           description: ''
   /api/auth/token/logout/:
     post:
-      tags:
-      - user
       operationId: CreateTokenDestroy
       description: Use this endpoint to logout user (remove user authentication token).
       parameters: []
