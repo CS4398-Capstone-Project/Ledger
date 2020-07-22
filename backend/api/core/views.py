@@ -1,11 +1,12 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
 from django.shortcuts import render
-from django.contrib.auth.models import User, Group, Profile, Doctor, Appointment
+from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
+#from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+
 from rest_framework_extensions.mixins import NestedViewSetMixin
-from  import models
-from  import serializers
+from . import models
+from . import serializers
+
 
 
 class UserViewSet(viewsets.ModelViewSet):
