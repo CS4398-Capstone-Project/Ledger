@@ -46,17 +46,47 @@ class LoginForm extends React.Component {
     });
 
     try {
-      let res = await fetch("/login", {
+      let res = await fetch("127.0.0.1:8000/api/auth/token/login/", {
         method: "post",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: this.state.username,
-          password: this.state.password,
+          "password": this.state.password,
+          "username": this.state.username,
         }),
       });
+/*
+    try {
+      // This will pull the login for a user that is running the backend localy
+      let res = await fetch("127.0.0.1:8000/api/auth/token/login/", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "password": this.state.password,
+          "username": this.state.username,
+        })
+      }).then((resp) => {
+        if(resp.state === 200) {
+          this.setState({success: true});
+        } return resp.json();
+      }).then((resp) => {
+        if(this.state.success) {
+          this.props.setToken("Token " + resp.auth_token)
+        } else {
+          let str = JSON.stirgify(resp)
+          let finalMessage = str.replace(/{|},|}/g, "\n").replace(/\[|\]|/g, "").replace(/,/g, ',\n')
+          console.log(resp);
+          this.setState({errorMessage: finalMessage});
+        }
+      }).catch((error) => {
+        console.log(error, "Login try-catch failure");
+      });
+*/
 
       let result = await res.json();
       if (result && result.success) {

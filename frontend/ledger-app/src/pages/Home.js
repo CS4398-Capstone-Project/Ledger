@@ -13,7 +13,7 @@ class Home extends React.Component {
   async componentDidMount() {
   
     try {
-      /*check if user is logined in or not by checking session*/
+      /*check if user is logged in or not by checking session*/
       let res = await fetch('/isLoggedIn', {
         method: 'post',
         headers: {
@@ -109,7 +109,7 @@ class Home extends React.Component {
         <div className="app">
           <div className= 'container'>
           <img src={logo}></img>
-          <LoginForm/>
+          <LoginForm />
           </div>
   
        </div>
