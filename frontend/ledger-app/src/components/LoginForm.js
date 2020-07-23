@@ -107,7 +107,7 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div className="loginForm">
-        Log in
+        Login
         <InputField
           type="text"
           placeholder="Username"

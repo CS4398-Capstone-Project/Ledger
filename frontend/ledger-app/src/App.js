@@ -21,23 +21,25 @@ class App extends React.Component {
     }
   };
 
-  return() {
-    <div>
-      <Route exact path='/' component={Home} />
-      <Route exact path='/customer' component={Customer} />
-      <Route exact path='/employee' component={Employee} />
-      <Route exact path='/admin' component={Admin} />
-      <Route exact path='/registration' component={Registration} />
+  render() {
+    return(
+      <div>
+        <Route exact path='/' component={Home} />
+        <Route exact path='/customer' component={Customer} />
+        <Route exact path='/employee' component={Employee} />
+        <Route exact path='/admin' component={Admin} />
+        <Route exact path='/registration' component={Registration} />
 
-      {/* <Route component={Error} /> */}
+        {/* <Route component={Error} /> */}
 {/*
-    <div className="App">
-      <ScheduleComponent currentView='Week' selectedDate= {new Date()} eventSettings={ { dataSource: data } }  >
-        <Inject services={[Day, Week, WorkWeek, Month, Agenda, TimelineMonth, MonthAgenda, TimelineViews, TimelineMonth]} />
-      </ScheduleComponent>
-    </div>
+      <div className="App">
+        <ScheduleComponent currentView='Week' selectedDate= {new Date()} eventSettings={ { dataSource: data } }  >
+          <Inject services={[Day, Week, WorkWeek, Month, Agenda, TimelineMonth, MonthAgenda, TimelineViews, TimelineMonth]} />
+        </ScheduleComponent>
+      </div>
 */}
-    </div>
+      </div>
+    );
   }
 }
 
