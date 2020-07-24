@@ -1,2 +1,5 @@
 # Ignore python/Django cache files.
 __pycache__
+
+# Ingore node modules.
+node_modules/

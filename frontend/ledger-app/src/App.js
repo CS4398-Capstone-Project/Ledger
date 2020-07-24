@@ -16,9 +16,15 @@ import Registration from "./pages/Registration";
 class App extends React.Component {
   constructor(props) {
     super(props);
+/*
     this.state = {
       //Users information goes here.
+      username: "",
+      userID: 0,
+      userPermissions: 0,
+      userToken: ""
     }
+*/
   };
 
   render() {
@@ -29,7 +35,6 @@ class App extends React.Component {
         <Route exact path='/employee' component={Employee} />
         <Route exact path='/admin' component={Admin} />
         <Route exact path='/registration' component={Registration} />
-
         {/* <Route component={Error} /> */}
 {/*
       <div className="App">

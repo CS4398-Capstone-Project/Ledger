@@ -92,6 +92,8 @@ class LoginForm extends React.Component {
       if (result && result.success) {
         UserStore.isLoggedIn = true;
         UserStore.username = result.username;
+        UserStore.userID = result.id;
+        UserStore.userPermissions = result.permission;
       } else if (result && result.sucess === false) {
         this.resetForm();
         alert(result.msg);

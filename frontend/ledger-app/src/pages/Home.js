@@ -7,6 +7,9 @@ import logo from '../logo.png'
 import '../App.css';
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+}
 
   /* start writing the API codes we will need for the components we will define the methods and course guide*/
   
