@@ -12,29 +12,40 @@ import Error from "./pages/Error";
 import Registration from "./pages/Registration";
 
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
-/*
+
     this.state = {
       //Users information goes here.
-      username: "",
-      userID: 0,
-      userPermissions: 0,
-      userToken: ""
+      userIsLoggedIn: false,
+      userIsLoading: true,
+      username: "Testing",
+      userID: -1,
+      userPermissions: -1,
+      userToken: "NONE"
     }
-*/
   };
 
   render() {
     return(
       <div>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/customer' component={Customer} />
-        <Route exact path='/employee' component={Employee} />
-        <Route exact path='/admin' component={Admin} />
-        <Route exact path='/registration' component={Registration} />
+        <Route exact path='/' render={props =>
+          (<Home state={this.state} />)
+        }/>
+        <Route exact path='/customer' render={props =>
+          (<Customer state={this.state} />)
+        }/>
+        <Route exact path='/employee' render={props => 
+          (<Employee state={this.state} />)
+        }/>
+        <Route exact path='/admin' render={props =>
+          (<Admin state={this.state} />)
+        }/>
+        <Route exact path='/registration' render={props =>
+          (<Registration state={this.state} />)
+        }/>
+
         {/* <Route component={Error} /> */}
 {/*
       <div className="App">

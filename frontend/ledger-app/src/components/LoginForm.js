@@ -1,138 +1,71 @@
 import React from "react";
-import InputField from "./InputField";
-import SubmitButton from "./SubmitButton";
-import UserStore from "./UserStore";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 class LoginForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: "",
-      buttonDisabled: false,
-    };
-  }
-
-  setInputValue(property, val) {
-    val = val.trim();
-    if (val.length > 12) {
-      return;
+ state = {
+        credentials: {username: '', password: ''},
+        islogin: false, from: '',
     }
-    this.setState({
-      [property]: val,
-    });
-  }
+    login = event => {
+        console.log('login here');
 
-  resetForm() {
-    this.setState({
-      username: "",
-      password: "",
-      buttonDisabled: false,
-    });
-  }
-
-  async doLogin() {
-    if (!this.state.username) {
-      return;
-    }
-    if (!this.state.password) {
-      return;
-    }
-
-    this.setState({
-      buttonDisabled: true,
-    });
-
-    try {
-      let res = await fetch("127.0.0.1:8000/api/auth/token/login/", {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "password": this.state.password,
-          "username": this.state.username,
-        }),
-      });
-/*
-    try {
-      // This will pull the login for a user that is running the backend localy
-      let res = await fetch("127.0.0.1:8000/api/auth/token/login/", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "password": this.state.password,
-          "username": this.state.username,
+        fetch('http://localhost:8000/auth/', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(this.state.credentials)
         })
-      }).then((resp) => {
-        if(resp.state === 200) {
-          this.setState({success: true});
-        } return resp.json();
-      }).then((resp) => {
-        if(this.state.success) {
-          this.props.setToken("Token " + resp.auth_token)
-        } else {
-          let str = JSON.stirgify(resp)
-          let finalMessage = str.replace(/{|},|}/g, "\n").replace(/\[|\]|/g, "").replace(/,/g, ',\n')
-          console.log(resp);
-          this.setState({errorMessage: finalMessage});
-        }
-      }).catch((error) => {
-        console.log(error, "Login try-catch failure");
-      });
-*/
-
-      let result = await res.json();
-      if (result && result.success) {
-        UserStore.isLoggedIn = true;
-        UserStore.username = result.username;
-        UserStore.userID = result.id;
-        UserStore.userPermissions = result.permission;
-      } else if (result && result.sucess === false) {
-        this.resetForm();
-        alert(result.msg);
-      }
-    } catch (e) {
-      console.log(e);
-      this.resetForm();
+        .then (data => data.json())
+        .then(
+            data => {
+                localStorage.setItem('token', data) // saving token to be used by other componenets if needed
+            }
+          )
+          .then(
+              this.setState({islogin : true})
+           )
+        .catch(error => console.error(error))
     }
-  }
+    inputChanged = event => {
+        const cred = this.state.credentials;
+        cred[event.target.name] = event.target.value; 
+        this.setState({credentials: cred});
+    }
 
-  async doSignUp() {}
+    renderRedirect = () => {
+      if (this.state.islogin) {
+      return <Redirect to='./Customer' /> }
+      
+    }
+    render() {
+      return (
+          <div>
+              <h1> Login user</h1>
 
-  render() {
-    return (
-      <div className="loginForm">
-        Login
-        <InputField
-          type="text"
-          placeholder="Username"
-          value={this.state.username ? this.state.username : ""}
-          onChange={(val) => this.setInputValue("username", val)}
-        />
-        <InputField
-          type="password"
-          placeholder="Password"
-          value={this.state.password ? this.state.username : ""}
-          onChange={(val) => this.setInputValue("password", val)}
-        />
-        <SubmitButton
-          text="Login"
-          disabled={this.state.buttonDisabled}
-          onClick={() => this.doLogin()}
-        />
-        <p>Not registered yet, Register Now</p>
-        <Link to={`/registration`}>
-          <Button text="SignUp" className='regBtn' > Register</Button>
-        </Link>
-      </div>
-    );
+              <label>
+                  username:
+                  <input type="text" name = "username" 
+                  value={this.state.credentials.username}
+                  onChange={this.inputChanged}/>
+              </label>
+              <br/>
+              <label>
+                  password:
+                  <input type="text" name = "password" 
+                  value={this.state.credentials.password}
+                  onChange={this.inputChanged}/>
+              </label>
+              <br/>
+              <br/>
+              <button as="Loginbutton" onClick={this.login}>Login</button>
+              <br/>
+              <br/>
+              <button onClick={this.register}>Register</button>
+              {this.renderRedirect()}
+
+          </div>
+
+      );
   }
 }
 export default LoginForm;
