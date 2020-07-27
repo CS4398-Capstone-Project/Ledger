@@ -29,6 +29,11 @@ class NestedDefaultRouter(NestedRouterMixin, routers.DefaultRouter):
 
 v1_router = NestedDefaultRouter()
 v1_router.register(r'profile', views.ProfileViewSet)
+v1_router.register(r'doctor', views.DoctorViewSet)
+v1_router.register(r'patient', views.PatientViewSet)
+v1_router.register(r'appointment', views.AppointmentViewSet)
+v1_router.register(r'user', views.UserViewSet)
+
 admin.site.site_header = 'Ledger admin'
 admin.site.site_title = 'Ledger admin'
 admin.site.index_title = 'Ledger administration'
