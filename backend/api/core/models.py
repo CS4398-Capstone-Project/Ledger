@@ -58,5 +58,5 @@ class Patient(models.Model):
 class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    date = models.CharField(max_length=50)
-    time_start = models.CharField(max_length=50)
+    date = models.DateField(max_length=50)
+    time_start = models.TimeField(max_length=50)
