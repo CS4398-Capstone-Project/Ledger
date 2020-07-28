@@ -14,6 +14,20 @@ TYPE_CHOICES = (
     ('2', 'Female')
 )
 
+TIME_CHOICES = (
+    ('1', '7:00am'),
+    ('2', '8:00am'),
+    ('3', '9:00am'),
+    ('4', '10:00am'),
+    ('5', '11:00am'),
+    ('6', '12:00pm'),
+    ('7', '1:00pm'),
+    ('8', '2:00pm'),
+    ('9', '3:00pm'),
+    ('10', '4:00pm'),
+    ('11', '5:00pm'),
+    )
+
 class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -24,7 +38,7 @@ class Profile(models.Model):
     gender = models.CharField(default="Choose Gender", max_length=50, choices=TYPE_CHOICES)
     address_1 = models.CharField(("address"), max_length=128, default="")
     address_2 = models.CharField(("address 2"), max_length=128, blank=True)
-    city = models.CharField(("city"), max_length=64, default="Mars")
+    city = models.CharField(("city"), max_length=64, default="")
     state = USStateField(("state"), default="TX")
     zip_code = models.CharField(("zip code"), max_length=5, default="43701")
 
@@ -59,4 +73,6 @@ class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     date = models.DateField(max_length=50)
-    time_start = models.TimeField(max_length=50)
+    start_time = models.CharField(default="Choose Start Time", max_length=50, choices=TIME_CHOICES)
+    end_time = models.CharField(default="Choose End Time", max_length=50, choices=TIME_CHOICES)
+    location = models.CharField(max_length=64, default="")
