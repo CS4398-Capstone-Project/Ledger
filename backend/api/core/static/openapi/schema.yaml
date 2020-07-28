@@ -20,7 +20,7 @@ tags:
     description: user access
     externalDocs:
       description: Djoser docs
-      url: 'https://djoser.readthedocs.io/en/latest/base_endpoints.html'
+      url: 'https://django-rest-auth.readthedocs.io/en/latest/api_endpoints.html'
 components:
   securitySchemes:
     ApiKeyAuth:        # arbitrary name for the security scheme
@@ -28,8 +28,10 @@ components:
       in: header       # can be "header", "query" or "cookie"
       name: Authorization token  # name of the header, query parameter or cookie
 paths:
-  /api/v1/profile/:
+  /api/profile/:
     get:
+      tags:
+        - profile
       operationId: listProfiles
       description: ''
       parameters:
@@ -76,8 +78,8 @@ paths:
                           nullable: true
                         date_registered:
                           type: string
+                          format: date
                           nullable: true
-                          maxLength: 50
                         phone_number:
                           type: string
                           nullable: true
@@ -163,6 +165,8 @@ paths:
                       - user
           description: ''
     post:
+        tags:
+              - profile
       operationId: createProfile
       description: ''
       parameters: []
@@ -182,8 +186,8 @@ paths:
                   nullable: true
                 date_registered:
                   type: string
+                  format: date
                   nullable: true
-                  maxLength: 50
                 phone_number:
                   type: string
                   nullable: true
@@ -288,8 +292,8 @@ paths:
                     nullable: true
                   date_registered:
                     type: string
+                    format: date
                     nullable: true
-                    maxLength: 50
                   phone_number:
                     type: string
                     nullable: true
@@ -374,8 +378,10 @@ paths:
                 required:
                 - user
           description: ''
-  /api/v1/profile/{id}/:
+  /api/profile/{id}/:
     get:
+        tags:
+            - profile
       operationId: retrieveProfile
       description: ''
       parameters:
@@ -402,8 +408,8 @@ paths:
                     nullable: true
                   date_registered:
                     type: string
+                    format: date
                     nullable: true
-                    maxLength: 50
                   phone_number:
                     type: string
                     nullable: true
@@ -489,6 +495,8 @@ paths:
                 - user
           description: ''
     put:
+        tags:
+          - profile
       operationId: updateProfile
       description: ''
       parameters:
@@ -514,8 +522,8 @@ paths:
                   nullable: true
                 date_registered:
                   type: string
+                  format: date
                   nullable: true
-                  maxLength: 50
                 phone_number:
                   type: string
                   nullable: true
@@ -620,8 +628,8 @@ paths:
                     nullable: true
                   date_registered:
                     type: string
+                    format: date
                     nullable: true
-                    maxLength: 50
                   phone_number:
                     type: string
                     nullable: true
@@ -707,6 +715,8 @@ paths:
                 - user
           description: ''
     patch:
+            tags:
+              - profile
       operationId: partial_updateProfile
       description: ''
       parameters:
@@ -732,8 +742,8 @@ paths:
                   nullable: true
                 date_registered:
                   type: string
+                  format: date
                   nullable: true
-                  maxLength: 50
                 phone_number:
                   type: string
                   nullable: true
@@ -836,8 +846,8 @@ paths:
                     nullable: true
                   date_registered:
                     type: string
+                    format: date
                     nullable: true
-                    maxLength: 50
                   phone_number:
                     type: string
                     nullable: true
@@ -923,6 +933,8 @@ paths:
                 - user
           description: ''
     delete:
+            tags:
+              - profile
       operationId: destroyProfile
       description: ''
       parameters:
@@ -935,9 +947,11 @@ paths:
       responses:
         '204':
           description: ''
-  /api/auth/users/:
+  /api/doctor/:
     get:
-      operationId: listUsers
+            tags:
+              - doctor
+      operationId: listDoctors
       description: ''
       parameters:
       - name: limit
@@ -972,21 +986,16 @@ paths:
                     type: array
                     items:
                       properties:
-                        email:
+                        work:
                           type: string
-                          format: email
-                          maxLength: 254
-                        id:
-                          type: integer
-                          readOnly: true
-                        username:
-                          type: string
-                          readOnly: true
-                          description: Required. 150 characters or fewer. Letters,
-                            digits and @/./+/-/_ only.
+                          maxLength: 50
+                      required:
+                      - work
           description: ''
     post:
-      operationId: createUser
+        tags:
+          - doctor
+      operationId: createDoctor
       description: ''
       parameters: []
       requestBody:
@@ -994,22 +1003,11 @@ paths:
           application/json:
             schema: &id004
               properties:
-                email:
+                work:
                   type: string
-                  format: email
-                  maxLength: 254
-                username:
-                  type: string
-                  description: Required. 150 characters or fewer. Letters, digits
-                    and @/./+/-/_ only.
-                  pattern: ^[\w.@+-]+\Z
-                  maxLength: 150
-                password:
-                  type: string
-                  writeOnly: true
+                  maxLength: 50
               required:
-              - username
-              - password
+              - work
           application/x-www-form-urlencoded:
             schema: *id004
           multipart/form-data:
@@ -1020,59 +1018,59 @@ paths:
             application/json:
               schema:
                 properties:
-                  email:
+                  work:
                     type: string
-                    format: email
-                    maxLength: 254
-                  username:
-                    type: string
-                    description: Required. 150 characters or fewer. Letters, digits
-                      and @/./+/-/_ only.
-                    pattern: ^[\w.@+-]+\Z
-                    maxLength: 150
-                  id:
-                    type: integer
-                    readOnly: true
+                    maxLength: 50
                 required:
-                - username
+                - work
           description: ''
-  /api/auth/users/me/:
+  /api/doctor/{id}/:
     get:
-      operationId: meUser
+        tags:
+          - doctor
+      operationId: retrieveDoctor
       description: ''
-      parameters: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this doctor.
+        schema:
+          type: string
       responses:
         '200':
           content:
             application/json:
               schema:
                 properties:
-                  email:
+                  work:
                     type: string
-                    format: email
-                    maxLength: 254
-                  id:
-                    type: integer
-                    readOnly: true
-                  username:
-                    type: string
-                    readOnly: true
-                    description: Required. 150 characters or fewer. Letters, digits
-                      and @/./+/-/_ only.
+                    maxLength: 50
+                required:
+                - work
           description: ''
     put:
-      operationId: meUser
+        tags:
+          - doctor
+      operationId: updateDoctor
       description: ''
-      parameters: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this doctor.
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
             schema: &id005
               properties:
-                email:
+                work:
                   type: string
-                  format: email
-                  maxLength: 254
+                  maxLength: 50
+              required:
+              - work
           application/x-www-form-urlencoded:
             schema: *id005
           multipart/form-data:
@@ -1083,32 +1081,32 @@ paths:
             application/json:
               schema:
                 properties:
-                  email:
+                  work:
                     type: string
-                    format: email
-                    maxLength: 254
-                  id:
-                    type: integer
-                    readOnly: true
-                  username:
-                    type: string
-                    readOnly: true
-                    description: Required. 150 characters or fewer. Letters, digits
-                      and @/./+/-/_ only.
+                    maxLength: 50
+                required:
+                - work
           description: ''
     patch:
-      operationId: meUser
+        tags:
+          - doctor
+      operationId: partial_updateDoctor
       description: ''
-      parameters: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this doctor.
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
             schema: &id006
               properties:
-                email:
+                work:
                   type: string
-                  format: email
-                  maxLength: 254
+                  maxLength: 50
           application/x-www-form-urlencoded:
             schema: *id006
           multipart/form-data:
@@ -1119,75 +1117,92 @@ paths:
             application/json:
               schema:
                 properties:
-                  email:
+                  work:
                     type: string
-                    format: email
-                    maxLength: 254
-                  id:
-                    type: integer
-                    readOnly: true
-                  username:
-                    type: string
-                    readOnly: true
-                    description: Required. 150 characters or fewer. Letters, digits
-                      and @/./+/-/_ only.
+                    maxLength: 50
+                required:
+                - work
           description: ''
     delete:
-      operationId: meUser
-      description: ''
-      parameters: []
-      responses:
-        '204':
-          description: ''
-  /api/auth/users/{id}/:
-    get:
-      operationId: retrieveUser
+        tags:
+          - doctor
+      operationId: destroyDoctor
       description: ''
       parameters:
       - name: id
         in: path
         required: true
-        description: A unique integer value identifying this user.
+        description: A unique integer value identifying this doctor.
         schema:
           type: string
+      responses:
+        '204':
+          description: ''
+  /api/patient/:
+    get:
+        tags:
+          - patient
+      operationId: listPatients
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
       responses:
         '200':
           content:
             application/json:
               schema:
+                type: object
                 properties:
-                  email:
-                    type: string
-                    format: email
-                    maxLength: 254
-                  id:
+                  count:
                     type: integer
-                    readOnly: true
-                  username:
+                    example: 123
+                  next:
                     type: string
-                    readOnly: true
-                    description: Required. 150 characters or fewer. Letters, digits
-                      and @/./+/-/_ only.
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        profile:
+                          type: integer
+                          nullable: true
+                        doctor:
+                          type: integer
+                      required:
+                      - doctor
           description: ''
-    put:
-      operationId: updateUser
+    post:
+      tags:
+        - patient
+      operationId: createPatient
       description: ''
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this user.
-        schema:
-          type: string
+      parameters: []
       requestBody:
         content:
           application/json:
             schema: &id007
               properties:
-                email:
-                  type: string
-                  format: email
-                  maxLength: 254
+                profile:
+                  type: integer
+                  nullable: true
+                doctor:
+                  type: integer
+              required:
+              - doctor
           application/x-www-form-urlencoded:
             schema: *id007
           multipart/form-data:
@@ -1198,27 +1213,51 @@ paths:
             application/json:
               schema:
                 properties:
-                  email:
-                    type: string
-                    format: email
-                    maxLength: 254
-                  id:
+                  profile:
                     type: integer
-                    readOnly: true
-                  username:
-                    type: string
-                    readOnly: true
-                    description: Required. 150 characters or fewer. Letters, digits
-                      and @/./+/-/_ only.
+                    nullable: true
+                  doctor:
+                    type: integer
+                required:
+                - doctor
           description: ''
-    patch:
-      operationId: partial_updateUser
+  /api/patient/{id}/:
+    get:
+      tags:
+        - patient
+      operationId: retrievePatient
       description: ''
       parameters:
       - name: id
         in: path
         required: true
-        description: A unique integer value identifying this user.
+        description: A unique integer value identifying this patient.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  profile:
+                    type: integer
+                    nullable: true
+                  doctor:
+                    type: integer
+                required:
+                - doctor
+          description: ''
+    put:
+      tags:
+        - patient
+      operationId: updatePatient
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this patient.
         schema:
           type: string
       requestBody:
@@ -1226,10 +1265,13 @@ paths:
           application/json:
             schema: &id008
               properties:
-                email:
-                  type: string
-                  format: email
-                  maxLength: 254
+                profile:
+                  type: integer
+                  nullable: true
+                doctor:
+                  type: integer
+              required:
+              - doctor
           application/x-www-form-urlencoded:
             schema: *id008
           multipart/form-data:
@@ -1240,49 +1282,36 @@ paths:
             application/json:
               schema:
                 properties:
-                  email:
-                    type: string
-                    format: email
-                    maxLength: 254
-                  id:
+                  profile:
                     type: integer
-                    readOnly: true
-                  username:
-                    type: string
-                    readOnly: true
-                    description: Required. 150 characters or fewer. Letters, digits
-                      and @/./+/-/_ only.
+                    nullable: true
+                  doctor:
+                    type: integer
+                required:
+                - doctor
           description: ''
-    delete:
-      operationId: destroyUser
+    patch:
+      tags:
+        - patient
+      operationId: partial_updatePatient
       description: ''
       parameters:
       - name: id
         in: path
         required: true
-        description: A unique integer value identifying this user.
+        description: A unique integer value identifying this patient.
         schema:
           type: string
-      responses:
-        '204':
-          description: ''
-  /api/auth/users/activation/:
-    post:
-      operationId: activationUser
-      description: ''
-      parameters: []
       requestBody:
         content:
           application/json:
             schema: &id009
               properties:
-                uid:
-                  type: string
-                token:
-                  type: string
-              required:
-              - uid
-              - token
+                profile:
+                  type: integer
+                  nullable: true
+                doctor:
+                  type: integer
           application/x-www-form-urlencoded:
             schema: *id009
           multipart/form-data:
@@ -1293,17 +1322,87 @@ paths:
             application/json:
               schema:
                 properties:
-                  uid:
-                    type: string
-                  token:
-                    type: string
+                  profile:
+                    type: integer
+                    nullable: true
+                  doctor:
+                    type: integer
                 required:
-                - uid
-                - token
+                - doctor
           description: ''
-  /api/auth/users/resend_activation/:
+    delete:
+      tags:
+        - patient
+      operationId: destroyPatient
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this patient.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /api/appointment/:
+    get:
+      tags:
+        - appointment
+      operationId: listAppointments
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        patient:
+                          type: integer
+                        doctor:
+                          type: integer
+                        date:
+                          type: string
+                          format: date
+                        time_start:
+                          type: string
+                      required:
+                      - patient
+                      - doctor
+                      - date
+                      - time_start
+          description: ''
     post:
-      operationId: resend_activationUser
+          tags:
+            - appointment
+      operationId: createAppointment
       description: ''
       parameters: []
       requestBody:
@@ -1311,11 +1410,20 @@ paths:
           application/json:
             schema: &id010
               properties:
-                email:
+                patient:
+                  type: integer
+                doctor:
+                  type: integer
+                date:
                   type: string
-                  format: email
+                  format: date
+                time_start:
+                  type: string
               required:
-              - email
+              - patient
+              - doctor
+              - date
+              - time_start
           application/x-www-form-urlencoded:
             schema: *id010
           multipart/form-data:
@@ -1326,27 +1434,86 @@ paths:
             application/json:
               schema:
                 properties:
-                  email:
+                  patient:
+                    type: integer
+                  doctor:
+                    type: integer
+                  date:
                     type: string
-                    format: email
+                    format: date
+                  time_start:
+                    type: string
                 required:
-                - email
+                - patient
+                - doctor
+                - date
+                - time_start
           description: ''
-  /api/auth/users/reset_password/:
-    post:
-      operationId: reset_passwordUser
+  /api/appointment/{id}/:
+    get:
+          tags:
+            - appointment
+      operationId: retrieveAppointment
       description: ''
-      parameters: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this appointment.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  patient:
+                    type: integer
+                  doctor:
+                    type: integer
+                  date:
+                    type: string
+                    format: date
+                  time_start:
+                    type: string
+                required:
+                - patient
+                - doctor
+                - date
+                - time_start
+          description: ''
+    put:
+          tags:
+            - appointment
+      operationId: updateAppointment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this appointment.
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
             schema: &id011
               properties:
-                email:
+                patient:
+                  type: integer
+                doctor:
+                  type: integer
+                date:
                   type: string
-                  format: email
+                  format: date
+                time_start:
+                  type: string
               required:
-              - email
+              - patient
+              - doctor
+              - date
+              - time_start
           application/x-www-form-urlencoded:
             schema: *id011
           multipart/form-data:
@@ -1357,32 +1524,47 @@ paths:
             application/json:
               schema:
                 properties:
-                  email:
+                  patient:
+                    type: integer
+                  doctor:
+                    type: integer
+                  date:
                     type: string
-                    format: email
+                    format: date
+                  time_start:
+                    type: string
                 required:
-                - email
+                - patient
+                - doctor
+                - date
+                - time_start
           description: ''
-  /api/auth/users/reset_password_confirm/:
-    post:
-      operationId: reset_password_confirmUser
+    patch:
+          tags:
+            - appointment
+      operationId: partial_updateAppointment
       description: ''
-      parameters: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this appointment.
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
             schema: &id012
               properties:
-                uid:
+                patient:
+                  type: integer
+                doctor:
+                  type: integer
+                date:
                   type: string
-                token:
+                  format: date
+                time_start:
                   type: string
-                new_password:
-                  type: string
-              required:
-              - uid
-              - token
-              - new_password
           application/x-www-form-urlencoded:
             schema: *id012
           multipart/form-data:
@@ -1393,194 +1575,524 @@ paths:
             application/json:
               schema:
                 properties:
-                  uid:
+                  patient:
+                    type: integer
+                  doctor:
+                    type: integer
+                  date:
                     type: string
-                  token:
-                    type: string
-                  new_password:
+                    format: date
+                  time_start:
                     type: string
                 required:
-                - uid
-                - token
-                - new_password
+                - patient
+                - doctor
+                - date
+                - time_start
           description: ''
-  /api/auth/users/reset_username/:
-    post:
-      operationId: reset_usernameUser
+    delete:
+          tags:
+            - appointment
+      operationId: destroyAppointment
       description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this appointment.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /rest-auth/logout/:
+    get:
+          tags:
+            - user
+      operationId: listLogouts
+      description: 'Calls Django logout method and delete the Token object
+
+        assigned to the current User object.
+
+
+        Accepts/Returns nothing.'
       parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema: &id013
-              properties:
-                email:
-                  type: string
-                  format: email
-              required:
-              - email
-          application/x-www-form-urlencoded:
-            schema: *id013
-          multipart/form-data:
-            schema: *id013
       responses:
         '200':
           content:
             application/json:
               schema:
-                properties:
-                  email:
-                    type: string
-                    format: email
-                required:
-                - email
+                type: array
+                items: {}
           description: ''
-  /api/auth/users/reset_username_confirm/:
     post:
-      operationId: reset_username_confirmUser
-      description: ''
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema: &id014
-              properties:
-                new_username:
-                  type: string
-                  description: Required. 150 characters or fewer. Letters, digits
-                    and @/./+/-/_ only.
-                  pattern: ^[\w.@+-]+\Z
-                  maxLength: 150
-              required:
-              - new_username
-          application/x-www-form-urlencoded:
-            schema: *id014
-          multipart/form-data:
-            schema: *id014
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  new_username:
-                    type: string
-                    description: Required. 150 characters or fewer. Letters, digits
-                      and @/./+/-/_ only.
-                    pattern: ^[\w.@+-]+\Z
-                    maxLength: 150
-                required:
-                - new_username
-          description: ''
-  /api/auth/users/set_password/:
-    post:
-      operationId: set_passwordUser
-      description: ''
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema: &id015
-              properties:
-                new_password:
-                  type: string
-                current_password:
-                  type: string
-              required:
-              - new_password
-              - current_password
-          application/x-www-form-urlencoded:
-            schema: *id015
-          multipart/form-data:
-            schema: *id015
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  new_password:
-                    type: string
-                  current_password:
-                    type: string
-                required:
-                - new_password
-                - current_password
-          description: ''
-  /api/auth/users/set_username/:
-    post:
-      operationId: set_usernameUser
-      description: ''
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema: &id016
-              properties:
-                new_username:
-                  type: string
-                  description: Required. 150 characters or fewer. Letters, digits
-                    and @/./+/-/_ only.
-                  pattern: ^[\w.@+-]+\Z
-                  maxLength: 150
-              required:
-              - new_username
-          application/x-www-form-urlencoded:
-            schema: *id016
-          multipart/form-data:
-            schema: *id016
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  new_username:
-                    type: string
-                    description: Required. 150 characters or fewer. Letters, digits
-                      and @/./+/-/_ only.
-                    pattern: ^[\w.@+-]+\Z
-                    maxLength: 150
-                required:
-                - new_username
-          description: ''
-  /api/auth/token/login/:
-    post:
-      operationId: CreateTokenCreate
-      description: Use this endpoint to obtain user authentication token.
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema: &id017
-              properties:
-                password:
-                  type: string
-                username:
-                  type: string
-          application/x-www-form-urlencoded:
-            schema: *id017
-          multipart/form-data:
-            schema: *id017
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                properties:
-                  password:
-                    type: string
-                  username:
-                    type: string
-          description: ''
-  /api/auth/token/logout/:
-    post:
-      operationId: CreateTokenDestroy
-      description: Use this endpoint to logout user (remove user authentication token).
+        tags:
+          - user
+      operationId: CreateLogout
+      description: 'Calls Django logout method and delete the Token object
+
+        assigned to the current User object.
+
+
+        Accepts/Returns nothing.'
       parameters: []
       responses:
         '200':
           content:
             application/json:
               schema: {}
+          description: ''
+  /rest-auth/user/:
+    get:
+        tags:
+          - user
+      operationId: RetrieveUserDetails
+      description: 'Reads and updates UserModel fields
+
+        Accepts GET, PUT, PATCH methods.
+
+
+        Default accepted fields: username, first_name, last_name
+
+        Default display fields: pk, username, email, first_name, last_name
+
+        Read-only fields: pk, email
+
+
+        Returns UserModel fields.'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  pk:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+\Z
+                    maxLength: 150
+                  email:
+                    type: string
+                    format: email
+                    readOnly: true
+                  first_name:
+                    type: string
+                    maxLength: 30
+                  last_name:
+                    type: string
+                    maxLength: 150
+                required:
+                - username
+          description: ''
+    put:
+        tags:
+          - user
+      operationId: UpdateUserDetails
+      description: 'Reads and updates UserModel fields
+
+        Accepts GET, PUT, PATCH methods.
+
+
+        Default accepted fields: username, first_name, last_name
+
+        Default display fields: pk, username, email, first_name, last_name
+
+        Read-only fields: pk, email
+
+
+        Returns UserModel fields.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id013
+              properties:
+                username:
+                  type: string
+                  description: Required. 150 characters or fewer. Letters, digits
+                    and @/./+/-/_ only.
+                  pattern: ^[\w.@+-]+\Z
+                  maxLength: 150
+                first_name:
+                  type: string
+                  maxLength: 30
+                last_name:
+                  type: string
+                  maxLength: 150
+              required:
+              - username
+          application/x-www-form-urlencoded:
+            schema: *id013
+          multipart/form-data:
+            schema: *id013
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  pk:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+\Z
+                    maxLength: 150
+                  email:
+                    type: string
+                    format: email
+                    readOnly: true
+                  first_name:
+                    type: string
+                    maxLength: 30
+                  last_name:
+                    type: string
+                    maxLength: 150
+                required:
+                - username
+          description: ''
+    patch:
+        tags:
+          - user
+      operationId: PartialUpdateUserDetails
+      description: 'Reads and updates UserModel fields
+
+        Accepts GET, PUT, PATCH methods.
+
+
+        Default accepted fields: username, first_name, last_name
+
+        Default display fields: pk, username, email, first_name, last_name
+
+        Read-only fields: pk, email
+
+
+        Returns UserModel fields.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id014
+              properties:
+                username:
+                  type: string
+                  description: Required. 150 characters or fewer. Letters, digits
+                    and @/./+/-/_ only.
+                  pattern: ^[\w.@+-]+\Z
+                  maxLength: 150
+                first_name:
+                  type: string
+                  maxLength: 30
+                last_name:
+                  type: string
+                  maxLength: 150
+          application/x-www-form-urlencoded:
+            schema: *id014
+          multipart/form-data:
+            schema: *id014
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  pk:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+\Z
+                    maxLength: 150
+                  email:
+                    type: string
+                    format: email
+                    readOnly: true
+                  first_name:
+                    type: string
+                    maxLength: 30
+                  last_name:
+                    type: string
+                    maxLength: 150
+                required:
+                - username
+          description: ''
+  /rest-auth/password/reset/:
+      tags:
+        - user
+    post:
+      operationId: CreatePasswordReset
+      description: 'Calls Django Auth PasswordResetForm save method.
+
+
+        Accepts the following POST parameters: email
+
+        Returns the success/fail message.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id015
+              properties:
+                email:
+                  type: string
+                  format: email
+              required:
+              - email
+          application/x-www-form-urlencoded:
+            schema: *id015
+          multipart/form-data:
+            schema: *id015
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  email:
+                    type: string
+                    format: email
+                required:
+                - email
+          description: ''
+  /rest-auth/password/reset/confirm/:
+      tags:
+        - user
+    post:
+      operationId: CreatePasswordResetConfirm
+      description: "Password reset e-mail link is confirmed, therefore\nthis resets\
+        \ the user's password.\n\nAccepts the following POST parameters: token, uid,\n\
+        \    new_password1, new_password2\nReturns the success/fail message."
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id016
+              properties:
+                new_password1:
+                  type: string
+                  maxLength: 128
+                new_password2:
+                  type: string
+                  maxLength: 128
+                uid:
+                  type: string
+                token:
+                  type: string
+              required:
+              - new_password1
+              - new_password2
+              - uid
+              - token
+          application/x-www-form-urlencoded:
+            schema: *id016
+          multipart/form-data:
+            schema: *id016
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  new_password1:
+                    type: string
+                    maxLength: 128
+                  new_password2:
+                    type: string
+                    maxLength: 128
+                  uid:
+                    type: string
+                  token:
+                    type: string
+                required:
+                - new_password1
+                - new_password2
+                - uid
+                - token
+          description: ''
+  /rest-auth/login/:
+      tags:
+        - user
+    post:
+      operationId: CreateLogin
+      description: 'Check the credentials and return the REST Token
+
+        if the credentials are valid and authenticated.
+
+        Calls Django Auth login method to register User ID
+
+        in Django session framework
+
+
+        Accept the following POST parameters: username, password
+
+        Return the REST Framework Token Object''s key.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id017
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+              required:
+              - password
+          application/x-www-form-urlencoded:
+            schema: *id017
+          multipart/form-data:
+            schema: *id017
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  username:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  password:
+                    type: string
+                required:
+                - password
+          description: ''
+  /rest-auth/password/change/:
+      tags:
+        - user
+    post:
+      operationId: CreatePasswordChange
+      description: 'Calls Django Auth SetPasswordForm save method.
+
+
+        Accepts the following POST parameters: new_password1, new_password2
+
+        Returns the success/fail message.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id018
+              properties:
+                new_password1:
+                  type: string
+                  maxLength: 128
+                new_password2:
+                  type: string
+                  maxLength: 128
+              required:
+              - new_password1
+              - new_password2
+          application/x-www-form-urlencoded:
+            schema: *id018
+          multipart/form-data:
+            schema: *id018
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  new_password1:
+                    type: string
+                    maxLength: 128
+                  new_password2:
+                    type: string
+                    maxLength: 128
+                required:
+                - new_password1
+                - new_password2
+          description: ''
+  /rest-auth/registration/:
+      tags:
+        - user
+    post:
+      operationId: CreateRegister
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id019
+              properties:
+                username:
+                  type: string
+                  maxLength: 150
+                  minLength: 1
+                email:
+                  type: string
+                  format: email
+                password1:
+                  type: string
+                  writeOnly: true
+                password2:
+                  type: string
+                  writeOnly: true
+              required:
+              - username
+              - password1
+              - password2
+          application/x-www-form-urlencoded:
+            schema: *id019
+          multipart/form-data:
+            schema: *id019
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  username:
+                    type: string
+                    maxLength: 150
+                    minLength: 1
+                  email:
+                    type: string
+                    format: email
+                required:
+                - username
+          description: ''
+  /rest-auth/registration/verify-email/:
+      tags:
+        - user
+    post:
+      operationId: CreateVerifyEmail
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id020
+              properties:
+                key:
+                  type: string
+              required:
+              - key
+          application/x-www-form-urlencoded:
+            schema: *id020
+          multipart/form-data:
+            schema: *id020
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  key:
+                    type: string
+                required:
+                - key
           description: ''
