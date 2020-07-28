@@ -1,8 +1,8 @@
 openapi: 3.0.2
 info:
-  title: 'Ledger'
+  title: 'Ledger API'
   version: 1.0.0
-  description: An API used to run an appointment management system
+  description: An API for appointment management
   termsOfService: http://swagger.io/terms/
   contact:
     email: adc129@txstate.edu
@@ -12,14 +12,14 @@ info:
 tags:
   - name: profile
     description: Access to user profiles
-  - name: doctor
-    description: Doctors
   - name: patient
-    description: patients
+    description: Access to patients
+  - name: doctor
+    description: Access to doctors
   - name: user
-    description: user access
+    description: Access to users
     externalDocs:
-      description: Djoser docs
+      description: Rest auth docs
       url: 'https://django-rest-auth.readthedocs.io/en/latest/api_endpoints.html'
 components:
   securitySchemes:
@@ -31,7 +31,7 @@ paths:
   /api/profile/:
     get:
       tags:
-        - profile
+      - profile
       operationId: listProfiles
       description: ''
       parameters:
@@ -165,8 +165,8 @@ paths:
                       - user
           description: ''
     post:
-        tags:
-              - profile
+      tags:
+      - profile
       operationId: createProfile
       description: ''
       parameters: []
@@ -380,8 +380,8 @@ paths:
           description: ''
   /api/profile/{id}/:
     get:
-        tags:
-            - profile
+      tags:
+      - profile
       operationId: retrieveProfile
       description: ''
       parameters:
@@ -495,8 +495,8 @@ paths:
                 - user
           description: ''
     put:
-        tags:
-          - profile
+      tags:
+      - profile
       operationId: updateProfile
       description: ''
       parameters:
@@ -715,8 +715,8 @@ paths:
                 - user
           description: ''
     patch:
-            tags:
-              - profile
+      tags:
+      - profile
       operationId: partial_updateProfile
       description: ''
       parameters:
@@ -933,8 +933,8 @@ paths:
                 - user
           description: ''
     delete:
-            tags:
-              - profile
+      tags:
+      - profile
       operationId: destroyProfile
       description: ''
       parameters:
@@ -949,8 +949,8 @@ paths:
           description: ''
   /api/doctor/:
     get:
-            tags:
-              - doctor
+      tags:
+      - doctor
       operationId: listDoctors
       description: ''
       parameters:
@@ -993,8 +993,8 @@ paths:
                       - work
           description: ''
     post:
-        tags:
-          - doctor
+      tags:
+      - doctor
       operationId: createDoctor
       description: ''
       parameters: []
@@ -1026,8 +1026,8 @@ paths:
           description: ''
   /api/doctor/{id}/:
     get:
-        tags:
-          - doctor
+      tags:
+      - doctor
       operationId: retrieveDoctor
       description: ''
       parameters:
@@ -1050,8 +1050,8 @@ paths:
                 - work
           description: ''
     put:
-        tags:
-          - doctor
+      tags:
+      - doctor
       operationId: updateDoctor
       description: ''
       parameters:
@@ -1088,8 +1088,8 @@ paths:
                 - work
           description: ''
     patch:
-        tags:
-          - doctor
+      tags:
+      - doctor
       operationId: partial_updateDoctor
       description: ''
       parameters:
@@ -1124,8 +1124,8 @@ paths:
                 - work
           description: ''
     delete:
-        tags:
-          - doctor
+      tags:
+      - doctor
       operationId: destroyDoctor
       description: ''
       parameters:
@@ -1140,8 +1140,8 @@ paths:
           description: ''
   /api/patient/:
     get:
-        tags:
-          - patient
+      tags:
+      - patient
       operationId: listPatients
       description: ''
       parameters:
@@ -1187,7 +1187,7 @@ paths:
           description: ''
     post:
       tags:
-        - patient
+      - patient
       operationId: createPatient
       description: ''
       parameters: []
@@ -1224,7 +1224,7 @@ paths:
   /api/patient/{id}/:
     get:
       tags:
-        - patient
+      - patient
       operationId: retrievePatient
       description: ''
       parameters:
@@ -1250,7 +1250,7 @@ paths:
           description: ''
     put:
       tags:
-        - patient
+      - patient
       operationId: updatePatient
       description: ''
       parameters:
@@ -1292,7 +1292,7 @@ paths:
           description: ''
     patch:
       tags:
-        - patient
+      - patient
       operationId: partial_updatePatient
       description: ''
       parameters:
@@ -1332,7 +1332,7 @@ paths:
           description: ''
     delete:
       tags:
-        - patient
+      - patient
       operationId: destroyPatient
       description: ''
       parameters:
@@ -1348,7 +1348,7 @@ paths:
   /api/appointment/:
     get:
       tags:
-        - appointment
+      - appointment
       operationId: listAppointments
       description: ''
       parameters:
@@ -1400,8 +1400,8 @@ paths:
                       - time_start
           description: ''
     post:
-          tags:
-            - appointment
+      tags:
+      - appointment
       operationId: createAppointment
       description: ''
       parameters: []
@@ -1451,8 +1451,8 @@ paths:
           description: ''
   /api/appointment/{id}/:
     get:
-          tags:
-            - appointment
+      tags:
+      - appointment
       operationId: retrieveAppointment
       description: ''
       parameters:
@@ -1484,8 +1484,8 @@ paths:
                 - time_start
           description: ''
     put:
-          tags:
-            - appointment
+      tags:
+      - appointment
       operationId: updateAppointment
       description: ''
       parameters:
@@ -1540,8 +1540,8 @@ paths:
                 - time_start
           description: ''
     patch:
-          tags:
-            - appointment
+      tags:
+      - appointment
       operationId: partial_updateAppointment
       description: ''
       parameters:
@@ -1591,8 +1591,8 @@ paths:
                 - time_start
           description: ''
     delete:
-          tags:
-            - appointment
+      tags:
+      - appointment
       operationId: destroyAppointment
       description: ''
       parameters:
@@ -1607,8 +1607,8 @@ paths:
           description: ''
   /rest-auth/logout/:
     get:
-          tags:
-            - user
+      tags:
+      - user
       operationId: listLogouts
       description: 'Calls Django logout method and delete the Token object
 
@@ -1626,8 +1626,8 @@ paths:
                 items: {}
           description: ''
     post:
-        tags:
-          - user
+      tags:
+      - user
       operationId: CreateLogout
       description: 'Calls Django logout method and delete the Token object
 
@@ -1644,8 +1644,8 @@ paths:
           description: ''
   /rest-auth/user/:
     get:
-        tags:
-          - user
+      tags:
+      - user
       operationId: RetrieveUserDetails
       description: 'Reads and updates UserModel fields
 
@@ -1690,8 +1690,8 @@ paths:
                 - username
           description: ''
     put:
-        tags:
-          - user
+      tags:
+      - user
       operationId: UpdateUserDetails
       description: 'Reads and updates UserModel fields
 
@@ -1759,8 +1759,8 @@ paths:
                 - username
           description: ''
     patch:
-        tags:
-          - user
+      tags:
+      - user
       operationId: PartialUpdateUserDetails
       description: 'Reads and updates UserModel fields
 
@@ -1826,9 +1826,9 @@ paths:
                 - username
           description: ''
   /rest-auth/password/reset/:
-      tags:
-        - user
     post:
+      tags:
+      - user
       operationId: CreatePasswordReset
       description: 'Calls Django Auth PasswordResetForm save method.
 
@@ -1864,9 +1864,9 @@ paths:
                 - email
           description: ''
   /rest-auth/password/reset/confirm/:
-      tags:
-        - user
     post:
+      tags:
+      - user
       operationId: CreatePasswordResetConfirm
       description: "Password reset e-mail link is confirmed, therefore\nthis resets\
         \ the user's password.\n\nAccepts the following POST parameters: token, uid,\n\
@@ -1919,9 +1919,9 @@ paths:
                 - token
           description: ''
   /rest-auth/login/:
-      tags:
-        - user
     post:
+      tags:
+      - user
       operationId: CreateLogin
       description: 'Check the credentials and return the REST Token
 
@@ -1971,9 +1971,9 @@ paths:
                 - password
           description: ''
   /rest-auth/password/change/:
-      tags:
-        - user
     post:
+      tags:
+      - user
       operationId: CreatePasswordChange
       description: 'Calls Django Auth SetPasswordForm save method.
 
@@ -2017,9 +2017,9 @@ paths:
                 - new_password2
           description: ''
   /rest-auth/registration/:
-      tags:
-        - user
     post:
+      tags:
+      - user
       operationId: CreateRegister
       description: ''
       parameters: []
@@ -2066,9 +2066,9 @@ paths:
                 - username
           description: ''
   /rest-auth/registration/verify-email/:
-      tags:
-        - user
     post:
+      tags:
+      - user
       operationId: CreateVerifyEmail
       description: ''
       parameters: []
