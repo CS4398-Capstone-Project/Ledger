@@ -35,5 +35,5 @@ class PatientViewSet(viewsets.ModelViewSet):
 
 class AppointmentViewSet(viewsets.ModelViewSet):
 
-    queryset = models.Appointment.objects.all()
+    queryset = models.Appointment.objects.all().order_by('date', 'time_start', 'patient')
     serializer_class = serializers.AppointmentSerializer
