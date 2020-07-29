@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'corsheaders',
     'phonenumber_field',
     'rest_framework',
     'rest_framework.authtoken',
@@ -70,7 +71,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
+CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'api.urls'
 
 TEMPLATES = [
