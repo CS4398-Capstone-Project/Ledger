@@ -11,6 +11,7 @@ django-cors-headers==3.4.0
 django-filter==2.3.0
 django-localflavor==3.0.1
 django-localflavor-us==1.1
+django-location-field==2.1.0
 django-mysql==3.8.1
 django-phonenumber-field==4.0.0
 django-rest-auth==0.9.5
@@ -19,6 +20,7 @@ django-templated-mail==1.1.1
 djangorestframework==3.11.0
 djangorestframework-jwt==1.11.0
 djangorestframework-simplejwt==4.4.0
+djoser==2.0.3
 drf-extensions==0.6.0
 idna==2.10
 itypes==1.2.0
