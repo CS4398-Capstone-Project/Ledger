@@ -30,44 +30,25 @@ ALLOWED_HOSTS = ['*']
 REST_FRAMEWORK = {
 #    'DEFAULT_FILTER_BACKENDS': ("django_filters.rest_framework.DjangoFilterBackend"),
      'DEFAULT_AUTHENTICATION_CLASSES': (
-<<<<<<< HEAD
-     'rest_framework.authentication.TokenAuthentication'
-=======
          'rest_framework.authentication.TokenAuthentication',
          'rest_framework.authentication.SessionAuthentication'
->>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
          ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 50,
     'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-<<<<<<< HEAD
-=======
     'django.contrib.sites',
->>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-<<<<<<< HEAD
-    'djoser',
-    'phonenumber_field',
-    'rest_framework',
-    'rest_framework.authtoken'
-]
-
-=======
     'corsheaders',
     'phonenumber_field',
     'rest_framework',
@@ -79,7 +60,6 @@ INSTALLED_APPS = [
 
 ]
 SITE_ID = 1
->>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -91,10 +71,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
 ROOT_URLCONF = 'api.urls'
 
 TEMPLATES = [
@@ -115,12 +91,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'api.wsgi.application'
 
-<<<<<<< HEAD
-=======
-CORS_ORIGIN_WHITELIST = [
-    "http://127.0.0.1:3000"
-]
->>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -139,17 +109,8 @@ CORS_ORIGIN_WHITELIST = [
 #For Development SQLite database
 DATABASES = {
     'default': {
-<<<<<<< HEAD
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'txst',
-        'PASSWORD': 'bobcats',
-        'HOST': 'localhost',
-        'PORT': '5432'
-=======
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
->>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
     }
 }
 # Password validation
@@ -200,10 +161,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-<<<<<<< HEAD
-=======
 CORS_ORIGIN_ALLOW_ALL = True
->>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
