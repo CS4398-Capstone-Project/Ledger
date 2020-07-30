@@ -30,8 +30,12 @@ MarkupSafe==1.1.1
 oauthlib==3.1.0
 openapi-codec==1.3.2
 phonenumbers==8.12.6
+<<<<<<< HEAD
 psycopg2==2.8.5
 PyJWT==1.7.1
+=======
+#psycopg2==2.8.5
+>>>>>>> 01b029d3694cedac7c1ae699a452116fe75e2927
 python-stdnum==1.13
 python3-openid==3.2.0
 pytz==2020.1

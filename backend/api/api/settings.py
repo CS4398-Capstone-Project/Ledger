@@ -91,6 +91,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'api.wsgi.application'
 
+CORS_ORIGIN_WHITELIST = [
+    "http://127.0.0.1:3000"
+]
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

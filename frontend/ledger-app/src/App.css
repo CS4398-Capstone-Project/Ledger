@@ -38,20 +38,33 @@
 }
 
 
-body, html, #root, .app, .container {
+body, html, #root, .app, .containe {
   width: 100%;
   height: 100%;
 
 }
 
 
-.container {
+.containe {
   font-size: 28px;
   color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #282c34;
+}
+.containe2 {
+  font-size: 28px;
+  color: #fff;
+  background-color: #282c34;
+}
+
+.logOutbtn{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  
   background-color: #282c34;
 }
 
@@ -97,19 +110,84 @@ body, html, #root, .app, .container {
  cursor: pointer;
  display: block;
  margin-left: auto;
- margin-right: auto
+ margin-right: auto;
+ border-radius: 90px;
 }
 
 p{
   padding-top: 30px;
   text-align: center;
-  
 }
 .regBtn{
   border-color: whitesmoke;
   background-color: transparent !important;
   color: whitesmoke;
   font-size: 40px;
-  
+  text-decoration: none
+}
+a {
+  color: #FFF;
+}
+a:hover {
+   color: wheat;
+}
+Button:hover {
+  color: rgb(80, 80, 228);
+}
+
+
+#about {
+ display: flex;
+ align-items: center;
+ background-color:rgba(43, 44, 45, 0.1);
+ height: 490px;
+}
+
+.about-text {
+ height: 450px;
+ width: 50%;
+ color: #414040;
+ padding-top: 80px;
+text-align: center;
+}
+.about-text ul {
+  padding-left: 200px;
+  text-align: left;
+  width: 90%;
+  font-weight: bolder;
+  font-size: xx-large;
+}
+span{
+  font-size: 45px;
+  font-weight: bolder;
+  color: black;
+}
+
+
+button{
+  font-size: 40px;
+  border-radius: 20px;
+  height: 100px;
+  width: 300px;
+  background-color: transparent;
+  color: whitesmoke;
+}
+
+img{
+  height: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.accountSec{
+  padding-top: 50px;
+}
+
+.calendarSec{
+  display: flex;
+  justify-content: center; 
+  padding-top: 100px;
+  height: 80%;
+  background-color:rgba(43, 44, 45, 0.1);
 }
 
