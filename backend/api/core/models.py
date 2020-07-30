@@ -84,4 +84,4 @@ class Appointment(models.Model):
     start_time = models.CharField(default="Choose Start Time", max_length=50, choices=TIME_CHOICES)
     end_time = models.CharField(default="Choose End Time", max_length=50, choices=TIME_CHOICES)
     location = models.CharField(max_length=64, default="")
-    repeat = models.IntegerField(choices=REPETITION_CHOICES)
+#    repeat = models.IntegerField(choices=REPETITION_CHOICES)
