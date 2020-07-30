@@ -29,11 +29,11 @@ TIME_CHOICES = (
     )
 
 REPETITION_CHOICES = (
-    (0, 'Never'),
-    (1, 'Daily'),
-    (7, 'Weekly'),
-    (31, 'Monthly'), #check this one against months
-    (365, 'Yearly') #leap year check
+    ('1', 'Never'),
+    ('2', 'Daily'),
+    ('3', 'Weekly'),
+    ('4', 'Monthly'),
+    ('5', 'Yearly')
 )
 
 class Profile(models.Model):
@@ -84,4 +84,4 @@ class Appointment(models.Model):
     start_time = models.CharField(default="Choose Start Time", max_length=50, choices=TIME_CHOICES)
     end_time = models.CharField(default="Choose End Time", max_length=50, choices=TIME_CHOICES)
     location = models.CharField(max_length=64, default="")
-#    repeat = models.IntegerField(choices=REPETITION_CHOICES)
+    repeat = models.CharField(default="Choose Repetition", max_length=50, choices=REPETITION_CHOICES)
