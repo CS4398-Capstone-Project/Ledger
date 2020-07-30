@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <ScheduleComponent currentView='Week' selectedDate= {new Date(2018, 1, 15)} eventSettings={ { dataSource: data } }  >
+      <ScheduleComponent currentView='Week' selectedDate= {new Date()} eventSettings={ { dataSource: data } }  >
         <Inject services={[Day, Week, WorkWeek, Month, Agenda, TimelineMonth, MonthAgenda, TimelineViews, TimelineMonth]} />
       </ScheduleComponent>
     </div>

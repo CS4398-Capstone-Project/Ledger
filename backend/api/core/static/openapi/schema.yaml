@@ -1,0 +1,2651 @@
+openapi: 3.0.2
+info:
+<<<<<<< HEAD
+  title: 'Ledger'
+  version: 1.0.0
+  description: An API used to run an appointment management system
+=======
+  title: 'Ledger API'
+  version: 1.0.0
+  description: An API for appointment management
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: adc129@txstate.edu
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+  - name: profile
+    description: Access to user profiles
+<<<<<<< HEAD
+  - name: doctor
+    description: Doctors
+  - name: patient
+    description: patients
+  - name: user
+    description: user access
+    externalDocs:
+      description: Djoser docs
+      url: 'https://djoser.readthedocs.io/en/latest/base_endpoints.html'
+=======
+  - name: patient
+    description: Access to patients
+  - name: doctor
+    description: Access to doctors
+  - name: user
+    description: Access to users
+    externalDocs:
+      description: Rest auth docs
+      url: 'https://django-rest-auth.readthedocs.io/en/latest/api_endpoints.html'
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+components:
+  securitySchemes:
+    ApiKeyAuth:        # arbitrary name for the security scheme
+      type: apiKey
+      in: header       # can be "header", "query" or "cookie"
+      name: Authorization token  # name of the header, query parameter or cookie
+paths:
+<<<<<<< HEAD
+  /api/v1/profile/:
+    get:
+=======
+  /api/profile/:
+    get:
+      tags:
+      - profile
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      operationId: listProfiles
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        user:
+                          type: integer
+                        bio:
+                          type: string
+                          maxLength: 500
+                        birth_date:
+                          type: string
+                          format: date
+                          nullable: true
+                        date_registered:
+                          type: string
+<<<<<<< HEAD
+                          nullable: true
+                          maxLength: 50
+=======
+                          format: date
+                          nullable: true
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+                        phone_number:
+                          type: string
+                          nullable: true
+                          maxLength: 128
+                        gender:
+                          enum:
+                          - '1'
+                          - '2'
+                        address_1:
+                          type: string
+                          maxLength: 128
+                        address_2:
+                          type: string
+                          maxLength: 128
+                        city:
+                          type: string
+                          maxLength: 64
+                        state:
+                          enum:
+                          - AL
+                          - AK
+                          - AS
+                          - AZ
+                          - AR
+                          - AA
+                          - AE
+                          - AP
+                          - CA
+                          - CO
+                          - CT
+                          - DE
+                          - DC
+                          - FL
+                          - GA
+                          - GU
+                          - HI
+                          - ID
+                          - IL
+                          - IN
+                          - IA
+                          - KS
+                          - KY
+                          - LA
+                          - ME
+                          - MD
+                          - MA
+                          - MI
+                          - MN
+                          - MS
+                          - MO
+                          - MT
+                          - NE
+                          - NV
+                          - NH
+                          - NJ
+                          - NM
+                          - NY
+                          - NC
+                          - ND
+                          - MP
+                          - OH
+                          - OK
+                          - OR
+                          - PA
+                          - PR
+                          - RI
+                          - SC
+                          - SD
+                          - TN
+                          - TX
+                          - UT
+                          - VT
+                          - VI
+                          - VA
+                          - WA
+                          - WV
+                          - WI
+                          - WY
+                        zip_code:
+                          type: string
+                          maxLength: 5
+                      required:
+                      - user
+          description: ''
+    post:
+<<<<<<< HEAD
+=======
+      tags:
+      - profile
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      operationId: createProfile
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id001
+              properties:
+                user:
+                  type: integer
+                bio:
+                  type: string
+                  maxLength: 500
+                birth_date:
+                  type: string
+                  format: date
+                  nullable: true
+                date_registered:
+                  type: string
+<<<<<<< HEAD
+                  nullable: true
+                  maxLength: 50
+=======
+                  format: date
+                  nullable: true
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+                phone_number:
+                  type: string
+                  nullable: true
+                  maxLength: 128
+                gender:
+                  enum:
+                  - '1'
+                  - '2'
+                address_1:
+                  type: string
+                  maxLength: 128
+                address_2:
+                  type: string
+                  maxLength: 128
+                city:
+                  type: string
+                  maxLength: 64
+                state:
+                  enum:
+                  - AL
+                  - AK
+                  - AS
+                  - AZ
+                  - AR
+                  - AA
+                  - AE
+                  - AP
+                  - CA
+                  - CO
+                  - CT
+                  - DE
+                  - DC
+                  - FL
+                  - GA
+                  - GU
+                  - HI
+                  - ID
+                  - IL
+                  - IN
+                  - IA
+                  - KS
+                  - KY
+                  - LA
+                  - ME
+                  - MD
+                  - MA
+                  - MI
+                  - MN
+                  - MS
+                  - MO
+                  - MT
+                  - NE
+                  - NV
+                  - NH
+                  - NJ
+                  - NM
+                  - NY
+                  - NC
+                  - ND
+                  - MP
+                  - OH
+                  - OK
+                  - OR
+                  - PA
+                  - PR
+                  - RI
+                  - SC
+                  - SD
+                  - TN
+                  - TX
+                  - UT
+                  - VT
+                  - VI
+                  - VA
+                  - WA
+                  - WV
+                  - WI
+                  - WY
+                zip_code:
+                  type: string
+                  maxLength: 5
+              required:
+              - user
+          application/x-www-form-urlencoded:
+            schema: *id001
+          multipart/form-data:
+            schema: *id001
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  user:
+                    type: integer
+                  bio:
+                    type: string
+                    maxLength: 500
+                  birth_date:
+                    type: string
+                    format: date
+                    nullable: true
+                  date_registered:
+                    type: string
+<<<<<<< HEAD
+                    nullable: true
+                    maxLength: 50
+=======
+                    format: date
+                    nullable: true
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+                  phone_number:
+                    type: string
+                    nullable: true
+                    maxLength: 128
+                  gender:
+                    enum:
+                    - '1'
+                    - '2'
+                  address_1:
+                    type: string
+                    maxLength: 128
+                  address_2:
+                    type: string
+                    maxLength: 128
+                  city:
+                    type: string
+                    maxLength: 64
+                  state:
+                    enum:
+                    - AL
+                    - AK
+                    - AS
+                    - AZ
+                    - AR
+                    - AA
+                    - AE
+                    - AP
+                    - CA
+                    - CO
+                    - CT
+                    - DE
+                    - DC
+                    - FL
+                    - GA
+                    - GU
+                    - HI
+                    - ID
+                    - IL
+                    - IN
+                    - IA
+                    - KS
+                    - KY
+                    - LA
+                    - ME
+                    - MD
+                    - MA
+                    - MI
+                    - MN
+                    - MS
+                    - MO
+                    - MT
+                    - NE
+                    - NV
+                    - NH
+                    - NJ
+                    - NM
+                    - NY
+                    - NC
+                    - ND
+                    - MP
+                    - OH
+                    - OK
+                    - OR
+                    - PA
+                    - PR
+                    - RI
+                    - SC
+                    - SD
+                    - TN
+                    - TX
+                    - UT
+                    - VT
+                    - VI
+                    - VA
+                    - WA
+                    - WV
+                    - WI
+                    - WY
+                  zip_code:
+                    type: string
+                    maxLength: 5
+                required:
+                - user
+          description: ''
+<<<<<<< HEAD
+  /api/v1/profile/{id}/:
+    get:
+=======
+  /api/profile/{id}/:
+    get:
+      tags:
+      - profile
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      operationId: retrieveProfile
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this profile.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  user:
+                    type: integer
+                  bio:
+                    type: string
+                    maxLength: 500
+                  birth_date:
+                    type: string
+                    format: date
+                    nullable: true
+                  date_registered:
+                    type: string
+<<<<<<< HEAD
+                    nullable: true
+                    maxLength: 50
+=======
+                    format: date
+                    nullable: true
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+                  phone_number:
+                    type: string
+                    nullable: true
+                    maxLength: 128
+                  gender:
+                    enum:
+                    - '1'
+                    - '2'
+                  address_1:
+                    type: string
+                    maxLength: 128
+                  address_2:
+                    type: string
+                    maxLength: 128
+                  city:
+                    type: string
+                    maxLength: 64
+                  state:
+                    enum:
+                    - AL
+                    - AK
+                    - AS
+                    - AZ
+                    - AR
+                    - AA
+                    - AE
+                    - AP
+                    - CA
+                    - CO
+                    - CT
+                    - DE
+                    - DC
+                    - FL
+                    - GA
+                    - GU
+                    - HI
+                    - ID
+                    - IL
+                    - IN
+                    - IA
+                    - KS
+                    - KY
+                    - LA
+                    - ME
+                    - MD
+                    - MA
+                    - MI
+                    - MN
+                    - MS
+                    - MO
+                    - MT
+                    - NE
+                    - NV
+                    - NH
+                    - NJ
+                    - NM
+                    - NY
+                    - NC
+                    - ND
+                    - MP
+                    - OH
+                    - OK
+                    - OR
+                    - PA
+                    - PR
+                    - RI
+                    - SC
+                    - SD
+                    - TN
+                    - TX
+                    - UT
+                    - VT
+                    - VI
+                    - VA
+                    - WA
+                    - WV
+                    - WI
+                    - WY
+                  zip_code:
+                    type: string
+                    maxLength: 5
+                required:
+                - user
+          description: ''
+    put:
+<<<<<<< HEAD
+=======
+      tags:
+      - profile
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      operationId: updateProfile
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this profile.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id002
+              properties:
+                user:
+                  type: integer
+                bio:
+                  type: string
+                  maxLength: 500
+                birth_date:
+                  type: string
+                  format: date
+                  nullable: true
+                date_registered:
+                  type: string
+<<<<<<< HEAD
+                  nullable: true
+                  maxLength: 50
+=======
+                  format: date
+                  nullable: true
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+                phone_number:
+                  type: string
+                  nullable: true
+                  maxLength: 128
+                gender:
+                  enum:
+                  - '1'
+                  - '2'
+                address_1:
+                  type: string
+                  maxLength: 128
+                address_2:
+                  type: string
+                  maxLength: 128
+                city:
+                  type: string
+                  maxLength: 64
+                state:
+                  enum:
+                  - AL
+                  - AK
+                  - AS
+                  - AZ
+                  - AR
+                  - AA
+                  - AE
+                  - AP
+                  - CA
+                  - CO
+                  - CT
+                  - DE
+                  - DC
+                  - FL
+                  - GA
+                  - GU
+                  - HI
+                  - ID
+                  - IL
+                  - IN
+                  - IA
+                  - KS
+                  - KY
+                  - LA
+                  - ME
+                  - MD
+                  - MA
+                  - MI
+                  - MN
+                  - MS
+                  - MO
+                  - MT
+                  - NE
+                  - NV
+                  - NH
+                  - NJ
+                  - NM
+                  - NY
+                  - NC
+                  - ND
+                  - MP
+                  - OH
+                  - OK
+                  - OR
+                  - PA
+                  - PR
+                  - RI
+                  - SC
+                  - SD
+                  - TN
+                  - TX
+                  - UT
+                  - VT
+                  - VI
+                  - VA
+                  - WA
+                  - WV
+                  - WI
+                  - WY
+                zip_code:
+                  type: string
+                  maxLength: 5
+              required:
+              - user
+          application/x-www-form-urlencoded:
+            schema: *id002
+          multipart/form-data:
+            schema: *id002
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  user:
+                    type: integer
+                  bio:
+                    type: string
+                    maxLength: 500
+                  birth_date:
+                    type: string
+                    format: date
+                    nullable: true
+                  date_registered:
+                    type: string
+<<<<<<< HEAD
+                    nullable: true
+                    maxLength: 50
+=======
+                    format: date
+                    nullable: true
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+                  phone_number:
+                    type: string
+                    nullable: true
+                    maxLength: 128
+                  gender:
+                    enum:
+                    - '1'
+                    - '2'
+                  address_1:
+                    type: string
+                    maxLength: 128
+                  address_2:
+                    type: string
+                    maxLength: 128
+                  city:
+                    type: string
+                    maxLength: 64
+                  state:
+                    enum:
+                    - AL
+                    - AK
+                    - AS
+                    - AZ
+                    - AR
+                    - AA
+                    - AE
+                    - AP
+                    - CA
+                    - CO
+                    - CT
+                    - DE
+                    - DC
+                    - FL
+                    - GA
+                    - GU
+                    - HI
+                    - ID
+                    - IL
+                    - IN
+                    - IA
+                    - KS
+                    - KY
+                    - LA
+                    - ME
+                    - MD
+                    - MA
+                    - MI
+                    - MN
+                    - MS
+                    - MO
+                    - MT
+                    - NE
+                    - NV
+                    - NH
+                    - NJ
+                    - NM
+                    - NY
+                    - NC
+                    - ND
+                    - MP
+                    - OH
+                    - OK
+                    - OR
+                    - PA
+                    - PR
+                    - RI
+                    - SC
+                    - SD
+                    - TN
+                    - TX
+                    - UT
+                    - VT
+                    - VI
+                    - VA
+                    - WA
+                    - WV
+                    - WI
+                    - WY
+                  zip_code:
+                    type: string
+                    maxLength: 5
+                required:
+                - user
+          description: ''
+    patch:
+<<<<<<< HEAD
+=======
+      tags:
+      - profile
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      operationId: partial_updateProfile
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this profile.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id003
+              properties:
+                user:
+                  type: integer
+                bio:
+                  type: string
+                  maxLength: 500
+                birth_date:
+                  type: string
+                  format: date
+                  nullable: true
+                date_registered:
+                  type: string
+<<<<<<< HEAD
+                  nullable: true
+                  maxLength: 50
+=======
+                  format: date
+                  nullable: true
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+                phone_number:
+                  type: string
+                  nullable: true
+                  maxLength: 128
+                gender:
+                  enum:
+                  - '1'
+                  - '2'
+                address_1:
+                  type: string
+                  maxLength: 128
+                address_2:
+                  type: string
+                  maxLength: 128
+                city:
+                  type: string
+                  maxLength: 64
+                state:
+                  enum:
+                  - AL
+                  - AK
+                  - AS
+                  - AZ
+                  - AR
+                  - AA
+                  - AE
+                  - AP
+                  - CA
+                  - CO
+                  - CT
+                  - DE
+                  - DC
+                  - FL
+                  - GA
+                  - GU
+                  - HI
+                  - ID
+                  - IL
+                  - IN
+                  - IA
+                  - KS
+                  - KY
+                  - LA
+                  - ME
+                  - MD
+                  - MA
+                  - MI
+                  - MN
+                  - MS
+                  - MO
+                  - MT
+                  - NE
+                  - NV
+                  - NH
+                  - NJ
+                  - NM
+                  - NY
+                  - NC
+                  - ND
+                  - MP
+                  - OH
+                  - OK
+                  - OR
+                  - PA
+                  - PR
+                  - RI
+                  - SC
+                  - SD
+                  - TN
+                  - TX
+                  - UT
+                  - VT
+                  - VI
+                  - VA
+                  - WA
+                  - WV
+                  - WI
+                  - WY
+                zip_code:
+                  type: string
+                  maxLength: 5
+          application/x-www-form-urlencoded:
+            schema: *id003
+          multipart/form-data:
+            schema: *id003
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  user:
+                    type: integer
+                  bio:
+                    type: string
+                    maxLength: 500
+                  birth_date:
+                    type: string
+                    format: date
+                    nullable: true
+                  date_registered:
+                    type: string
+<<<<<<< HEAD
+                    nullable: true
+                    maxLength: 50
+=======
+                    format: date
+                    nullable: true
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+                  phone_number:
+                    type: string
+                    nullable: true
+                    maxLength: 128
+                  gender:
+                    enum:
+                    - '1'
+                    - '2'
+                  address_1:
+                    type: string
+                    maxLength: 128
+                  address_2:
+                    type: string
+                    maxLength: 128
+                  city:
+                    type: string
+                    maxLength: 64
+                  state:
+                    enum:
+                    - AL
+                    - AK
+                    - AS
+                    - AZ
+                    - AR
+                    - AA
+                    - AE
+                    - AP
+                    - CA
+                    - CO
+                    - CT
+                    - DE
+                    - DC
+                    - FL
+                    - GA
+                    - GU
+                    - HI
+                    - ID
+                    - IL
+                    - IN
+                    - IA
+                    - KS
+                    - KY
+                    - LA
+                    - ME
+                    - MD
+                    - MA
+                    - MI
+                    - MN
+                    - MS
+                    - MO
+                    - MT
+                    - NE
+                    - NV
+                    - NH
+                    - NJ
+                    - NM
+                    - NY
+                    - NC
+                    - ND
+                    - MP
+                    - OH
+                    - OK
+                    - OR
+                    - PA
+                    - PR
+                    - RI
+                    - SC
+                    - SD
+                    - TN
+                    - TX
+                    - UT
+                    - VT
+                    - VI
+                    - VA
+                    - WA
+                    - WV
+                    - WI
+                    - WY
+                  zip_code:
+                    type: string
+                    maxLength: 5
+                required:
+                - user
+          description: ''
+    delete:
+<<<<<<< HEAD
+=======
+      tags:
+      - profile
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      operationId: destroyProfile
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this profile.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+<<<<<<< HEAD
+  /api/auth/users/:
+    get:
+      operationId: listUsers
+=======
+  /api/doctor/:
+    get:
+      tags:
+      - doctor
+      operationId: listDoctors
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+<<<<<<< HEAD
+                        email:
+                          type: string
+                          format: email
+                          maxLength: 254
+                        id:
+                          type: integer
+                          readOnly: true
+                        username:
+                          type: string
+                          readOnly: true
+                          description: Required. 150 characters or fewer. Letters,
+                            digits and @/./+/-/_ only.
+          description: ''
+    post:
+      operationId: createUser
+=======
+                        work:
+                          type: string
+                          maxLength: 50
+                      required:
+                      - work
+          description: ''
+    post:
+      tags:
+      - doctor
+      operationId: createDoctor
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id004
+              properties:
+<<<<<<< HEAD
+                email:
+                  type: string
+                  format: email
+                  maxLength: 254
+                username:
+                  type: string
+                  description: Required. 150 characters or fewer. Letters, digits
+                    and @/./+/-/_ only.
+                  pattern: ^[\w.@+-]+\Z
+                  maxLength: 150
+                password:
+                  type: string
+                  writeOnly: true
+              required:
+              - username
+              - password
+=======
+                work:
+                  type: string
+                  maxLength: 50
+              required:
+              - work
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id004
+          multipart/form-data:
+            schema: *id004
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+\Z
+                    maxLength: 150
+                  id:
+                    type: integer
+                    readOnly: true
+                required:
+                - username
+          description: ''
+  /api/auth/users/me/:
+    get:
+      operationId: meUser
+      description: ''
+      parameters: []
+=======
+                  work:
+                    type: string
+                    maxLength: 50
+                required:
+                - work
+          description: ''
+  /api/doctor/{id}/:
+    get:
+      tags:
+      - doctor
+      operationId: retrieveDoctor
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this doctor.
+        schema:
+          type: string
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  id:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    readOnly: true
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+          description: ''
+    put:
+      operationId: meUser
+      description: ''
+      parameters: []
+=======
+                  work:
+                    type: string
+                    maxLength: 50
+                required:
+                - work
+          description: ''
+    put:
+      tags:
+      - doctor
+      operationId: updateDoctor
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this doctor.
+        schema:
+          type: string
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      requestBody:
+        content:
+          application/json:
+            schema: &id005
+              properties:
+<<<<<<< HEAD
+                email:
+                  type: string
+                  format: email
+                  maxLength: 254
+=======
+                work:
+                  type: string
+                  maxLength: 50
+              required:
+              - work
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id005
+          multipart/form-data:
+            schema: *id005
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  id:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    readOnly: true
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+          description: ''
+    patch:
+      operationId: meUser
+      description: ''
+      parameters: []
+=======
+                  work:
+                    type: string
+                    maxLength: 50
+                required:
+                - work
+          description: ''
+    patch:
+      tags:
+      - doctor
+      operationId: partial_updateDoctor
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this doctor.
+        schema:
+          type: string
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      requestBody:
+        content:
+          application/json:
+            schema: &id006
+              properties:
+<<<<<<< HEAD
+                email:
+                  type: string
+                  format: email
+                  maxLength: 254
+=======
+                work:
+                  type: string
+                  maxLength: 50
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id006
+          multipart/form-data:
+            schema: *id006
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  id:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    readOnly: true
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+          description: ''
+    delete:
+      operationId: meUser
+      description: ''
+      parameters: []
+      responses:
+        '204':
+          description: ''
+  /api/auth/users/{id}/:
+    get:
+      operationId: retrieveUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+=======
+                  work:
+                    type: string
+                    maxLength: 50
+                required:
+                - work
+          description: ''
+    delete:
+      tags:
+      - doctor
+      operationId: destroyDoctor
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this doctor.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /api/patient/:
+    get:
+      tags:
+      - patient
+      operationId: listPatients
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+<<<<<<< HEAD
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  id:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    readOnly: true
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+          description: ''
+    put:
+      operationId: updateUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+=======
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        profile:
+                          type: integer
+                          nullable: true
+                        doctor:
+                          type: integer
+                      required:
+                      - doctor
+          description: ''
+    post:
+      tags:
+      - patient
+      operationId: createPatient
+      description: ''
+      parameters: []
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      requestBody:
+        content:
+          application/json:
+            schema: &id007
+              properties:
+<<<<<<< HEAD
+                email:
+                  type: string
+                  format: email
+                  maxLength: 254
+=======
+                profile:
+                  type: integer
+                  nullable: true
+                doctor:
+                  type: integer
+              required:
+              - doctor
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id007
+          multipart/form-data:
+            schema: *id007
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  id:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    readOnly: true
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+          description: ''
+    patch:
+      operationId: partial_updateUser
+=======
+                  profile:
+                    type: integer
+                    nullable: true
+                  doctor:
+                    type: integer
+                required:
+                - doctor
+          description: ''
+  /api/patient/{id}/:
+    get:
+      tags:
+      - patient
+      operationId: retrievePatient
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this patient.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  profile:
+                    type: integer
+                    nullable: true
+                  doctor:
+                    type: integer
+                required:
+                - doctor
+          description: ''
+    put:
+      tags:
+      - patient
+      operationId: updatePatient
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+<<<<<<< HEAD
+        description: A unique integer value identifying this user.
+=======
+        description: A unique integer value identifying this patient.
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema: &id008
+              properties:
+<<<<<<< HEAD
+                email:
+                  type: string
+                  format: email
+                  maxLength: 254
+=======
+                profile:
+                  type: integer
+                  nullable: true
+                doctor:
+                  type: integer
+              required:
+              - doctor
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id008
+          multipart/form-data:
+            schema: *id008
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  email:
+                    type: string
+                    format: email
+                    maxLength: 254
+                  id:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    readOnly: true
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+          description: ''
+    delete:
+      operationId: destroyUser
+=======
+                  profile:
+                    type: integer
+                    nullable: true
+                  doctor:
+                    type: integer
+                required:
+                - doctor
+          description: ''
+    patch:
+      tags:
+      - patient
+      operationId: partial_updatePatient
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+<<<<<<< HEAD
+        description: A unique integer value identifying this user.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /api/auth/users/activation/:
+    post:
+      operationId: activationUser
+      description: ''
+      parameters: []
+=======
+        description: A unique integer value identifying this patient.
+        schema:
+          type: string
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      requestBody:
+        content:
+          application/json:
+            schema: &id009
+              properties:
+<<<<<<< HEAD
+                uid:
+                  type: string
+                token:
+                  type: string
+              required:
+              - uid
+              - token
+=======
+                profile:
+                  type: integer
+                  nullable: true
+                doctor:
+                  type: integer
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id009
+          multipart/form-data:
+            schema: *id009
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  uid:
+                    type: string
+                  token:
+                    type: string
+                required:
+                - uid
+                - token
+          description: ''
+  /api/auth/users/resend_activation/:
+    post:
+      operationId: resend_activationUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id010
+              properties:
+                email:
+                  type: string
+                  format: email
+              required:
+              - email
+=======
+                  profile:
+                    type: integer
+                    nullable: true
+                  doctor:
+                    type: integer
+                required:
+                - doctor
+          description: ''
+    delete:
+      tags:
+      - patient
+      operationId: destroyPatient
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this patient.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /api/appointment/:
+    get:
+      tags:
+      - appointment
+      operationId: listAppointments
+      description: ''
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    example: 123
+                  next:
+                    type: string
+                    nullable: true
+                  previous:
+                    type: string
+                    nullable: true
+                  results:
+                    type: array
+                    items:
+                      properties:
+                        patient:
+                          type: integer
+                        doctor:
+                          type: integer
+                        date:
+                          type: string
+                          format: date
+                        time_start:
+                          type: string
+                      required:
+                      - patient
+                      - doctor
+                      - date
+                      - time_start
+          description: ''
+    post:
+      tags:
+      - appointment
+      operationId: createAppointment
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id010
+              properties:
+                patient:
+                  type: integer
+                doctor:
+                  type: integer
+                date:
+                  type: string
+                  format: date
+                time_start:
+                  type: string
+              required:
+              - patient
+              - doctor
+              - date
+              - time_start
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id010
+          multipart/form-data:
+            schema: *id010
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  email:
+                    type: string
+                    format: email
+                required:
+                - email
+          description: ''
+  /api/auth/users/reset_password/:
+    post:
+      operationId: reset_passwordUser
+      description: ''
+      parameters: []
+=======
+                  patient:
+                    type: integer
+                  doctor:
+                    type: integer
+                  date:
+                    type: string
+                    format: date
+                  time_start:
+                    type: string
+                required:
+                - patient
+                - doctor
+                - date
+                - time_start
+          description: ''
+  /api/appointment/{id}/:
+    get:
+      tags:
+      - appointment
+      operationId: retrieveAppointment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this appointment.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  patient:
+                    type: integer
+                  doctor:
+                    type: integer
+                  date:
+                    type: string
+                    format: date
+                  time_start:
+                    type: string
+                required:
+                - patient
+                - doctor
+                - date
+                - time_start
+          description: ''
+    put:
+      tags:
+      - appointment
+      operationId: updateAppointment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this appointment.
+        schema:
+          type: string
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      requestBody:
+        content:
+          application/json:
+            schema: &id011
+              properties:
+<<<<<<< HEAD
+                email:
+                  type: string
+                  format: email
+              required:
+              - email
+=======
+                patient:
+                  type: integer
+                doctor:
+                  type: integer
+                date:
+                  type: string
+                  format: date
+                time_start:
+                  type: string
+              required:
+              - patient
+              - doctor
+              - date
+              - time_start
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id011
+          multipart/form-data:
+            schema: *id011
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  email:
+                    type: string
+                    format: email
+                required:
+                - email
+          description: ''
+  /api/auth/users/reset_password_confirm/:
+    post:
+      operationId: reset_password_confirmUser
+      description: ''
+      parameters: []
+=======
+                  patient:
+                    type: integer
+                  doctor:
+                    type: integer
+                  date:
+                    type: string
+                    format: date
+                  time_start:
+                    type: string
+                required:
+                - patient
+                - doctor
+                - date
+                - time_start
+          description: ''
+    patch:
+      tags:
+      - appointment
+      operationId: partial_updateAppointment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this appointment.
+        schema:
+          type: string
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      requestBody:
+        content:
+          application/json:
+            schema: &id012
+              properties:
+<<<<<<< HEAD
+                uid:
+                  type: string
+                token:
+                  type: string
+                new_password:
+                  type: string
+              required:
+              - uid
+              - token
+              - new_password
+=======
+                patient:
+                  type: integer
+                doctor:
+                  type: integer
+                date:
+                  type: string
+                  format: date
+                time_start:
+                  type: string
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id012
+          multipart/form-data:
+            schema: *id012
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  uid:
+                    type: string
+                  token:
+                    type: string
+                  new_password:
+                    type: string
+                required:
+                - uid
+                - token
+                - new_password
+          description: ''
+  /api/auth/users/reset_username/:
+    post:
+      operationId: reset_usernameUser
+      description: ''
+=======
+                  patient:
+                    type: integer
+                  doctor:
+                    type: integer
+                  date:
+                    type: string
+                    format: date
+                  time_start:
+                    type: string
+                required:
+                - patient
+                - doctor
+                - date
+                - time_start
+          description: ''
+    delete:
+      tags:
+      - appointment
+      operationId: destroyAppointment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this appointment.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /rest-auth/logout/:
+    get:
+      tags:
+      - user
+      operationId: listLogouts
+      description: 'Calls Django logout method and delete the Token object
+
+        assigned to the current User object.
+
+
+        Accepts/Returns nothing.'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+    post:
+      tags:
+      - user
+      operationId: CreateLogout
+      description: 'Calls Django logout method and delete the Token object
+
+        assigned to the current User object.
+
+
+        Accepts/Returns nothing.'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: {}
+          description: ''
+  /rest-auth/user/:
+    get:
+      tags:
+      - user
+      operationId: RetrieveUserDetails
+      description: 'Reads and updates UserModel fields
+
+        Accepts GET, PUT, PATCH methods.
+
+
+        Default accepted fields: username, first_name, last_name
+
+        Default display fields: pk, username, email, first_name, last_name
+
+        Read-only fields: pk, email
+
+
+        Returns UserModel fields.'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  pk:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+\Z
+                    maxLength: 150
+                  email:
+                    type: string
+                    format: email
+                    readOnly: true
+                  first_name:
+                    type: string
+                    maxLength: 30
+                  last_name:
+                    type: string
+                    maxLength: 150
+                required:
+                - username
+          description: ''
+    put:
+      tags:
+      - user
+      operationId: UpdateUserDetails
+      description: 'Reads and updates UserModel fields
+
+        Accepts GET, PUT, PATCH methods.
+
+
+        Default accepted fields: username, first_name, last_name
+
+        Default display fields: pk, username, email, first_name, last_name
+
+        Read-only fields: pk, email
+
+
+        Returns UserModel fields.'
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id013
+              properties:
+<<<<<<< HEAD
+                email:
+                  type: string
+                  format: email
+              required:
+              - email
+=======
+                username:
+                  type: string
+                  description: Required. 150 characters or fewer. Letters, digits
+                    and @/./+/-/_ only.
+                  pattern: ^[\w.@+-]+\Z
+                  maxLength: 150
+                first_name:
+                  type: string
+                  maxLength: 30
+                last_name:
+                  type: string
+                  maxLength: 150
+              required:
+              - username
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id013
+          multipart/form-data:
+            schema: *id013
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  email:
+                    type: string
+                    format: email
+                required:
+                - email
+          description: ''
+  /api/auth/users/reset_username_confirm/:
+    post:
+      operationId: reset_username_confirmUser
+      description: ''
+=======
+                  pk:
+                    type: integer
+                    readOnly: true
+                  username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+\Z
+                    maxLength: 150
+                  email:
+                    type: string
+                    format: email
+                    readOnly: true
+                  first_name:
+                    type: string
+                    maxLength: 30
+                  last_name:
+                    type: string
+                    maxLength: 150
+                required:
+                - username
+          description: ''
+    patch:
+      tags:
+      - user
+      operationId: PartialUpdateUserDetails
+      description: 'Reads and updates UserModel fields
+
+        Accepts GET, PUT, PATCH methods.
+
+
+        Default accepted fields: username, first_name, last_name
+
+        Default display fields: pk, username, email, first_name, last_name
+
+        Read-only fields: pk, email
+
+
+        Returns UserModel fields.'
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id014
+              properties:
+<<<<<<< HEAD
+                new_username:
+=======
+                username:
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+                  type: string
+                  description: Required. 150 characters or fewer. Letters, digits
+                    and @/./+/-/_ only.
+                  pattern: ^[\w.@+-]+\Z
+                  maxLength: 150
+<<<<<<< HEAD
+              required:
+              - new_username
+=======
+                first_name:
+                  type: string
+                  maxLength: 30
+                last_name:
+                  type: string
+                  maxLength: 150
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id014
+          multipart/form-data:
+            schema: *id014
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  new_username:
+=======
+                  pk:
+                    type: integer
+                    readOnly: true
+                  username:
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+\Z
+                    maxLength: 150
+<<<<<<< HEAD
+                required:
+                - new_username
+          description: ''
+  /api/auth/users/set_password/:
+    post:
+      operationId: set_passwordUser
+      description: ''
+=======
+                  email:
+                    type: string
+                    format: email
+                    readOnly: true
+                  first_name:
+                    type: string
+                    maxLength: 30
+                  last_name:
+                    type: string
+                    maxLength: 150
+                required:
+                - username
+          description: ''
+  /rest-auth/password/reset/:
+    post:
+      tags:
+      - user
+      operationId: CreatePasswordReset
+      description: 'Calls Django Auth PasswordResetForm save method.
+
+
+        Accepts the following POST parameters: email
+
+        Returns the success/fail message.'
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id015
+              properties:
+<<<<<<< HEAD
+                new_password:
+                  type: string
+                current_password:
+                  type: string
+              required:
+              - new_password
+              - current_password
+=======
+                email:
+                  type: string
+                  format: email
+              required:
+              - email
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id015
+          multipart/form-data:
+            schema: *id015
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  new_password:
+                    type: string
+                  current_password:
+                    type: string
+                required:
+                - new_password
+                - current_password
+          description: ''
+  /api/auth/users/set_username/:
+    post:
+      operationId: set_usernameUser
+      description: ''
+=======
+                  email:
+                    type: string
+                    format: email
+                required:
+                - email
+          description: ''
+  /rest-auth/password/reset/confirm/:
+    post:
+      tags:
+      - user
+      operationId: CreatePasswordResetConfirm
+      description: "Password reset e-mail link is confirmed, therefore\nthis resets\
+        \ the user's password.\n\nAccepts the following POST parameters: token, uid,\n\
+        \    new_password1, new_password2\nReturns the success/fail message."
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id016
+              properties:
+<<<<<<< HEAD
+                new_username:
+                  type: string
+                  description: Required. 150 characters or fewer. Letters, digits
+                    and @/./+/-/_ only.
+                  pattern: ^[\w.@+-]+\Z
+                  maxLength: 150
+              required:
+              - new_username
+=======
+                new_password1:
+                  type: string
+                  maxLength: 128
+                new_password2:
+                  type: string
+                  maxLength: 128
+                uid:
+                  type: string
+                token:
+                  type: string
+              required:
+              - new_password1
+              - new_password2
+              - uid
+              - token
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id016
+          multipart/form-data:
+            schema: *id016
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  new_username:
+                    type: string
+                    description: Required. 150 characters or fewer. Letters, digits
+                      and @/./+/-/_ only.
+                    pattern: ^[\w.@+-]+\Z
+                    maxLength: 150
+                required:
+                - new_username
+          description: ''
+  /api/auth/token/login/:
+    post:
+      operationId: CreateTokenCreate
+      description: Use this endpoint to obtain user authentication token.
+=======
+                  new_password1:
+                    type: string
+                    maxLength: 128
+                  new_password2:
+                    type: string
+                    maxLength: 128
+                  uid:
+                    type: string
+                  token:
+                    type: string
+                required:
+                - new_password1
+                - new_password2
+                - uid
+                - token
+          description: ''
+  /rest-auth/login/:
+    post:
+      tags:
+      - user
+      operationId: CreateLogin
+      description: 'Check the credentials and return the REST Token
+
+        if the credentials are valid and authenticated.
+
+        Calls Django Auth login method to register User ID
+
+        in Django session framework
+
+
+        Accept the following POST parameters: username, password
+
+        Return the REST Framework Token Object''s key.'
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id017
+              properties:
+<<<<<<< HEAD
+                password:
+                  type: string
+                username:
+                  type: string
+=======
+                username:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+              required:
+              - password
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          application/x-www-form-urlencoded:
+            schema: *id017
+          multipart/form-data:
+            schema: *id017
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+<<<<<<< HEAD
+                  password:
+                    type: string
+                  username:
+                    type: string
+          description: ''
+  /api/auth/token/logout/:
+    post:
+      operationId: CreateTokenDestroy
+      description: Use this endpoint to logout user (remove user authentication token).
+      parameters: []
+=======
+                  username:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+                  password:
+                    type: string
+                required:
+                - password
+          description: ''
+  /rest-auth/password/change/:
+    post:
+      tags:
+      - user
+      operationId: CreatePasswordChange
+      description: 'Calls Django Auth SetPasswordForm save method.
+
+
+        Accepts the following POST parameters: new_password1, new_password2
+
+        Returns the success/fail message.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id018
+              properties:
+                new_password1:
+                  type: string
+                  maxLength: 128
+                new_password2:
+                  type: string
+                  maxLength: 128
+              required:
+              - new_password1
+              - new_password2
+          application/x-www-form-urlencoded:
+            schema: *id018
+          multipart/form-data:
+            schema: *id018
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  new_password1:
+                    type: string
+                    maxLength: 128
+                  new_password2:
+                    type: string
+                    maxLength: 128
+                required:
+                - new_password1
+                - new_password2
+          description: ''
+  /rest-auth/registration/:
+    post:
+      tags:
+      - user
+      operationId: CreateRegister
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id019
+              properties:
+                username:
+                  type: string
+                  maxLength: 150
+                  minLength: 1
+                email:
+                  type: string
+                  format: email
+                password1:
+                  type: string
+                  writeOnly: true
+                password2:
+                  type: string
+                  writeOnly: true
+              required:
+              - username
+              - password1
+              - password2
+          application/x-www-form-urlencoded:
+            schema: *id019
+          multipart/form-data:
+            schema: *id019
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  username:
+                    type: string
+                    maxLength: 150
+                    minLength: 1
+                  email:
+                    type: string
+                    format: email
+                required:
+                - username
+          description: ''
+  /rest-auth/registration/verify-email/:
+    post:
+      tags:
+      - user
+      operationId: CreateVerifyEmail
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema: &id020
+              properties:
+                key:
+                  type: string
+              required:
+              - key
+          application/x-www-form-urlencoded:
+            schema: *id020
+          multipart/form-data:
+            schema: *id020
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+      responses:
+        '200':
+          content:
+            application/json:
+<<<<<<< HEAD
+              schema: {}
+=======
+              schema:
+                properties:
+                  key:
+                    type: string
+                required:
+                - key
+>>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
+          description: ''
