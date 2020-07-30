@@ -1,6 +1,7 @@
 import React from "react";
 import InputField from "./InputField";
 import SubmitButton from "./SubmitButton";
+import UserStore from "./UserStore";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
@@ -45,54 +46,22 @@ class LoginForm extends React.Component {
     });
 
     try {
-      let res = await fetch("127.0.0.1:8000/api/auth/token/login/", {
+      let res = await fetch("/login", {
         method: "post",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "password": this.state.password,
-          "username": this.state.username,
+          username: this.state.username,
+          password: this.state.password,
         }),
       });
-/*
-    try {
-      // This will pull the login for a user that is running the backend localy
-      let res = await fetch("127.0.0.1:8000/api/auth/token/login/", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "password": this.state.password,
-          "username": this.state.username,
-        })
-      }).then((resp) => {
-        if(resp.state === 200) {
-          this.setState({success: true});
-        } return resp.json();
-      }).then((resp) => {
-        if(this.state.success) {
-          this.props.setToken("Token " + resp.auth_token)
-        } else {
-          let str = JSON.stirgify(resp)
-          let finalMessage = str.replace(/{|},|}/g, "\n").replace(/\[|\]|/g, "").replace(/,/g, ',\n')
-          console.log(resp);
-          this.setState({errorMessage: finalMessage});
-        }
-      }).catch((error) => {
-        console.log(error, "Login try-catch failure");
-      });
-*/
 
       let result = await res.json();
       if (result && result.success) {
-        this.props.state.isLoggedIn = true;
-        this.props.state.username = result.username;
-        this.props.state.userID = result.id;
-        this.props.state.userPermissions = result.permission;
+        UserStore.isLoggedIn = true;
+        UserStore.username = result.username;
       } else if (result && result.sucess === false) {
         this.resetForm();
         alert(result.msg);
@@ -108,7 +77,7 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div className="loginForm">
-        Login
+        Log in
         <InputField
           type="text"
           placeholder="Username"

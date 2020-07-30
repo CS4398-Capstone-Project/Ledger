@@ -1,24 +1,19 @@
 import React from "react";
 import { observer } from 'mobx-react';
+import UserStore    from  '../components/UserStore';
 import LoginForm    from  '../components/LoginForm';
 import SubmitButton from  '../components/SubmitButton';
 import logo from '../logo.png'
 import '../App.css';
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    //this.state = {
-      //isLoading: this.props.state.userIsLoading
-    //}
-}
 
   /* start writing the API codes we will need for the components we will define the methods and course guide*/
   
   async componentDidMount() {
   
     try {
-      /*check if user is logged in or not by checking session*/
+      /*check if user is logined in or not by checking session*/
       let res = await fetch('/isLoggedIn', {
         method: 'post',
         headers: {
@@ -30,23 +25,22 @@ class Home extends React.Component {
       let result = await res.json();
   
       if (result && result.success) {
-        this.props.state.userIsLoading = false; /* user is logged in so they are in already*/
-        this.props.state.userIsLoggedIn = true;
-        this.props.state.username = result.username;
+        UserStore.loading = false; /* user is logged in so they are in already*/
+        UserStore.isLoggedIn = true;
+        UserStore.username = result.username;
   
       }
   
       else {
-        this.props.state.userIsLoading = false;
-        this.props.state.userIsLoggedIn = false;
+        UserStore.loading = false;
+        UserStore.isLoggedIn = false;
       }
   
     }
   
     catch(e) {
-      //this.setState({isLoading: false});
-      this.props.state.userIsLoggedIn = false;
-      this.props.state.userIsLoggedIn = false;
+      UserStore.loading = false;
+      UserStore.isLoggedIn = false;
     }
   }
   
@@ -67,10 +61,13 @@ class Home extends React.Component {
       let result = await res.json();
   
       if (result && result.success) {
-        this.props.state.userIsLoggedIn = false; /*user has logged out*/
-        this.props.state.username = '';
+        UserStore.isLoggedIn = false; /*user has logged out*/
+        UserStore.username = '';
       }
+  
+  
     }
+  
     catch(e) {
       console.log(e)
     }
@@ -78,12 +75,11 @@ class Home extends React.Component {
   
   
   render() {
-    if(this.props.state.userIsLoading) {
+    if (UserStore.loading) {
       return (
         <div className = "app">
           <div className = 'container'>
-            {console.log("user loggin: " + this.props.state.userIsLoggedIn)}
-            Loading, please wait...
+            loading, please wait...
           </div>
         </div>
       );
@@ -91,11 +87,11 @@ class Home extends React.Component {
     
     else {
   
-      if(this.props.state.userIsLoggedIn) {
+      if(UserStore.isLoggedIn) {
         return (
           <div className = "app">
             <div className = 'container'>
-              Welcome {this.props.state.username}
+              Welcome {UserStore.username}
   
               <SubmitButton 
                 text = {'Log out'}
@@ -113,7 +109,7 @@ class Home extends React.Component {
         <div className="app">
           <div className= 'container'>
           <img src={logo}></img>
-          <LoginForm state={this.props.state}/>
+          <LoginForm/>
           </div>
   
        </div>
