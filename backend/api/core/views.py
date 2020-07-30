@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-import django_filters
+from rest_framework import generics
+from rest_framework import filters
 #from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from rest_framework_extensions.mixins import NestedViewSetMixin
@@ -37,10 +38,17 @@ class PatientViewSet(viewsets.ModelViewSet):
 
 class AppointmentViewSet(viewsets.ModelViewSet):
 
-    queryset = models.Appointment.objects.all().order_by('date', 'start_time', 'patient')
+    queryset = models.Appointment.objects.all()
     serializer_class = serializers.AppointmentSerializer
 
-class AppointmentFilter(django_filters.FilterSet):
-    class Meta:
-        model = Appointment
-        fields = ['date', 'start_time', 'patient']
+class AppointmentSearchView(generics.ListAPIView):
+    queryset = Appointment.objects.all()
+    serializer_class = serializers.AppointmentSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['date', 'start_time', 'patient']
+
+class AppointmentOrderView(generics.ListAPIView):
+    queryset = Appointment.objects.all()
+    serializer_class = serializers.AppointmentSerializer
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['date', 'start_time']
