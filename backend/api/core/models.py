@@ -14,8 +14,6 @@ TYPE_CHOICES = (
     ('2', 'Female')
 )
 
-<<<<<<< HEAD
-=======
 TIME_CHOICES = (
     ('1', '7:00am'),
     ('2', '8:00am'),
@@ -38,7 +36,6 @@ REPETITION_CHOICES = (
     ('5', 'Yearly')
 )
 
->>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
 class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -49,11 +46,7 @@ class Profile(models.Model):
     gender = models.CharField(default="Choose Gender", max_length=50, choices=TYPE_CHOICES)
     address_1 = models.CharField(("address"), max_length=128, default="")
     address_2 = models.CharField(("address 2"), max_length=128, blank=True)
-<<<<<<< HEAD
-    city = models.CharField(("city"), max_length=64, default="Mars")
-=======
     city = models.CharField(("city"), max_length=64, default="")
->>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
     state = USStateField(("state"), default="TX")
     zip_code = models.CharField(("zip code"), max_length=5, default="43701")
 
@@ -87,13 +80,8 @@ class Patient(models.Model):
 class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-<<<<<<< HEAD
-    date = models.CharField(max_length=50)
-    time_start = models.CharField(max_length=50)
-=======
     date = models.DateField(max_length=50)
     start_time = models.CharField(default="Choose Start Time", max_length=50, choices=TIME_CHOICES)
     end_time = models.CharField(default="Choose End Time", max_length=50, choices=TIME_CHOICES)
     location = models.CharField(max_length=64, default="")
     repeat = models.CharField(default="Choose Repetition", max_length=50, choices=REPETITION_CHOICES)
->>>>>>> d312bec4e5a3453885c9a2971d8024add262d188

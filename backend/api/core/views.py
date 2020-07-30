@@ -35,10 +35,6 @@ class PatientViewSet(viewsets.ModelViewSet):
 
 class AppointmentViewSet(viewsets.ModelViewSet):
 
-<<<<<<< HEAD
-    queryset = models.Appointment.objects.all()
-    serializer_class = serializers.AppointmentSerializer
-=======
     queryset = models.Appointment.objects.all().order_by('date', 'time_start', 'patient')
     serializer_class = serializers.AppointmentSerializer
 
@@ -58,4 +54,3 @@ class AppointmentViewSet(viewsets.ModelViewSet):
 #        queryset = queryset.filter(patient__iexact = patient_exact_query)
 
 #    return render(request, "index.html",{})
->>>>>>> d312bec4e5a3453885c9a2971d8024add262d188

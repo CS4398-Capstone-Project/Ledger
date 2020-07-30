@@ -47,11 +47,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = models.Appointment
-<<<<<<< HEAD
-        fields = ['Patient', 'Doctor', 'date', 'time_start']
-=======
         fields = ['patient', 'doctor', 'date','start_time', 'end_time', 'location']
->>>>>>> d312bec4e5a3453885c9a2971d8024add262d188
 
 
 class DoctorSerializer(serializers.ModelSerializer):
