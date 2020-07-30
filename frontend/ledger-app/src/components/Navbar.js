@@ -1,8 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
 import logo from "../logo.png";
-=======
->>>>>>> 3657472d51b2706b5920490d5ceb2560d1fc3f91
 
 const Navbar = () => {
   return (
