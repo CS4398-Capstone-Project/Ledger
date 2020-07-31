@@ -20,6 +20,7 @@
 
 ## Features
 List of features ready and TODOs for future development
+* **This project is currently under development and is not currently stable enough for deployment.**
 
 ## Status
 [comment]: <> (Project is: _in progress_, _finished_, _no longer continue_ and why?)
@@ -58,22 +59,29 @@ and backend with the following:
 
     ./runServers.sh
 
----add more about execution here---
+Once you have started the servers, your prefered internet browser should open to the home page of the Ledger system where you must then login. All new users are designated as customers and so will only be able to view available appointment times, make appointments, and edit their own user information. To create a new account with either employee or administrative privileges an existing administrater must either create and assign you account with such privileges or you must request an existing administrator to elevate your privileges.
+
+The Default administrator account username is **txst** with the password **bobcats**, you can use this account information to log into both the frontend and the backend.
 
 ## Unit Testcases
-
+Both the frontend and backend have unit test cases to test the functionality of crutial elements of the system.
+For the frontend, these tests include the requests to the backend and the accurate rendering of components.
+For the backend, these tests include the handling of requests and the calculations applied to user data.
 
 ## Acceptance Testcases
-
+Acceptance testing of this system was preformed by the opposing development team in this project throughout the development to meet the requirements set out by the System Requirements Specification.
 
 ## Testing Suite Operation
-
+Below are the instructions for the operation of the testing suites for both the frontend and the backend.
+### Frontend Testing 
+---
+### Backend Testing
 
 ## UML Class Diagram
-
+--- Currently creating digital version ---
 
 ## System Statechart Diagrams
-
+--- Currently creating digital version ---
 
 ## Description of System Structure
 ```
