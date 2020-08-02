@@ -31,7 +31,7 @@ List of features ready and TODOs for future development
 ## Technologies
 * Python >= 3.7
 * React >= 16.13
-* Redux >= 4.0 
+* Redux >= 4.0
 * Django REST framework >= 3.11.0
 * Django >= 3.0.8
 * Djoser >= 2.0.3
@@ -73,12 +73,13 @@ Acceptance testing of this system was preformed by the opposing development team
 
 ## Testing Suite Operation
 Below are the instructions for the operation of the testing suites for both the frontend and the backend.
-### Frontend Testing 
+### Frontend Testing
 ---
 ### Backend Testing
 
 ## UML Class Diagram
---- Currently creating digital version ---
+Backend
+![](images/myapp_models.png)
 
 ## System Statechart Diagrams
 --- Currently creating digital version ---
@@ -94,7 +95,7 @@ Below are the instructions for the operation of the testing suites for both the 
     ├── public
     └── src
 ```
-The system is structured as a fullstack environment with a server for the frontend user interfaces and a server for the backend calculations and database. This design decision was made in order to allow users of this system to host and/or store their information locally or remotely. Because the system uses react as the frontend, it can easily be customized and hosted remotely and can be upgraded, scaled, and migrated to different hosts without effecting business and  the user would still have access to their data locally. 
+The system is structured as a fullstack environment with a server for the frontend user interfaces and a server for the backend calculations and database. This design decision was made in order to allow users of this system to host and/or store their information locally or remotely. Because the system uses react as the frontend, it can easily be customized and hosted remotely and can be upgraded, scaled, and migrated to different hosts without effecting business and  the user would still have access to their data locally.
 
 The essential algorithms to the operation of the Ledger Scheduling System include an initial "first come, first serve" queue for assigning appointments to available time slots and then a hashing of the available employees to these appointments. There can be multiple assignments to the same time slot **Only if there are enough available employees** (i.e.: three customers can have have an appointment at 8 iff there are three employees available at that time) if there aren't enough employees available then the time slot is not available for a customer to select.
 
