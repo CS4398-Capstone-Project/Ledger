@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'django_filters',
+    'django_extensions',
 
 ]
 SITE_ID = 1
