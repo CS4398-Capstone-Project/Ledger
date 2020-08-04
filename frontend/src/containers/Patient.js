@@ -10,16 +10,44 @@ import {
   Menu,
   Segment
 } from "semantic-ui-react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../store/actions/auth";
-import Navbar from "../components/Navbar";
+
 import Calendar from "../components/Calendar";
 import LedgerLogo from '../components/logo.png';
 
-class Patient extends React.Component {
+
+class CustomLayout extends React.Component {
+
+  state = {
+    token : localStorage.getItem(`token`),
+    userinfo: []
+}
+
+componentDidMount = () => {
+    fetch('http://localhost:8000/rest-auth/user/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${this.state.token}`
+    },
+        body: JSON.stringify(this.state.credentials)
+    })
+    .then (data => data.json())
+    .then(
+        data => {
+            this.setState({userinfo: data})
+        }
+    ).catch(error => console.error(error))
+}
+
   render() {
+    const { token } = this.props;
     const { authenticated } = this.props;
+    if (!authenticated) {
+      return <Redirect to="/" />;
+    }
     return (
       <div>
         <Menu fixed="top" inverted>
@@ -52,49 +80,46 @@ class Patient extends React.Component {
           style={{ margin: "5em 0em 0em", padding: "5em 0em" }}
         >
           <Container textAlign="center">
-            <Grid divided inverted stackable>
-                <List link inverted>
-                  <Navbar/>
+            <Grid centered>
+                <List link inverted style={{ fontSize: "3em" }}>
+                  <ul> 
+                    <div><span>Username: </span> {this.state.userinfo.username} </div>
+                    <br/>
+                    <br/>
+                    <div><span>First Name: </span> {this.state.userinfo.first_name}</div>
+                    <br/>
+                    <br/>
+                    <div><span>Last Name: </span> {this.state.userinfo.last_name}</div>
+                    <br/>
+                    <br/>
+                    <div><span>Email: </span> {this.state.userinfo.email}</div>
+                  </ul>
                 </List>
             </Grid>
             <Divider inverted section />
+            <Image
+              centered
+              rounded
+              size="small"
+              src={LedgerLogo}
+            />
+
           </Container>
         </Segment>
-
         <Segment
           inverted
-          vertical
-          style={{ margin: "5em 0em 0em", padding: "5em 0em" }}
+          style={{ margin: "5em 5em 0em", padding: "3em 3em" }}
         >
-          <Container textAlign="center">
-            <Grid divided inverted stackable>
-                <List link inverted>
-                  <Calendar/>
-                </List>
-            </Grid>
-
-            <Divider inverted section />
-            <Image centered size="small" src={LedgerLogo} />
-            <List horizontal inverted divided link size="small">
-              <List.Item as="a" href="#">
-                Site Map
-              </List.Item>
-              <List.Item as="a" href="#">
-                Contact Us
-              </List.Item>
-              <List.Item as="a" href="#">
-                Terms and Conditions
-              </List.Item>
-              <List.Item as="a" href="#">
-                Privacy Policy
-              </List.Item>
-            </List>
-          </Container>
+          <Grid centered>
+            <Calendar/>
+          </Grid>
         </Segment>
       </div>
     );
   }
 }
+
+
 
 const mapStateToProps = state => {
   return {
@@ -112,5 +137,5 @@ export default withRouter(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Patient)
+  )(CustomLayout)
 );

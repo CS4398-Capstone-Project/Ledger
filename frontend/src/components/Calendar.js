@@ -51,7 +51,7 @@ export default class Calendar extends Component {
         <ViewDirective option="WorkWeek" />
           <ViewDirective option="Day" />
           <ViewDirective option="TimelineWorkWeek"         timeScale={{
-          enable: false}} />
+          enable: true}} />
         </ViewsDirective>
         <Inject services={[Day, Week, WorkWeek, TimelineViews]} />
       </ScheduleComponent>
