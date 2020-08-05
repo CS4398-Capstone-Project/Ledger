@@ -91,7 +91,7 @@ after which you should see the tests running and something similar to the follow
 ![Ledger Django uml class diagram](images/myapp_models.png)
 
 ## System Statechart Diagrams
-![Ledger Statechart diagram](https://i.ibb.co/zZWL2Zg/Ledger-State-Diagram.png)
+![Ledger Statechart diagram](images/LedgerStateDiagram.png)
 
 ## Description of System Structure
 ```
