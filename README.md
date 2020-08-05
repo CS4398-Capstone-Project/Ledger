@@ -38,7 +38,6 @@ List of features ready and TODOs for future development
 * Redux >= 4.0
 * Django REST framework >= 3.11.0
 * Django >= 3.0.8
-* Djoser >= 2.0.3
 
 ## Setup
 In order to execute this application you must first download the source code.
