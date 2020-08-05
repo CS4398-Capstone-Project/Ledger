@@ -82,7 +82,8 @@ Below are the instructions for the operation of the testing suites for both the 
 --- Information on how to test the frontend ---
 
 ### Backend Testing
---- Information on how to test the backend ---
+Before running the server run command:
+python manage.py test 
 
 ## UML Class Diagram
 ### Frontend
