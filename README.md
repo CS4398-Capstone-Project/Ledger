@@ -11,8 +11,7 @@
   - [Unit Testcases](#unit-testcases)
   - [Acceptance Testcases](#acceptance-testcases)
   - [Testing Suite Operation](#testing-suite-operation)
-    - [Frontend Testing](#frontend-testing)
-    - [Backend Testing](#backend-testing)
+    - [Testing](#testing)
   - [UML Class Diagram](#uml-class-diagram)
   - [System Statechart Diagrams](#system-statechart-diagrams)
   - [Description of System Structure](#description-of-system-structure)
@@ -72,15 +71,21 @@ For the backend, these tests include the handling of requests and the calculatio
 ## Acceptance Testcases
 Acceptance testing of this system was preformed by the opposing development team in this project throughout the development to meet the requirements set out by the System Requirements Specification.
 
+![Ledger Acceptance Tests](https://i.ibb.co/54L1sQg/Backend-Testing.png)
+
 ## Testing Suite Operation
 Below are the instructions for the operation of the testing suites for both the frontend and the backend.
 
-### Frontend Testing 
---- Information on how to test the frontend ---
+### Testing 
+In order to run the testing suite for the Ledger system, you simply run the following command in your terminal from the frontend directory.
 
-### Backend Testing
-Before running the server run command:
-python manage.py test 
+```
+$ npm test
+```
+
+after which you should see the tests running and something similar to the following output:
+
+![Ledger testing suite](https://i.ibb.co/hs3kZn3/Frontend-Testing.png)
 
 ## UML Class Diagram
 ![Ledger Django uml class diagram](images/myapp_models.png)
