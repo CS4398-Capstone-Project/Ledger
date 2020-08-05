@@ -14,8 +14,6 @@
     - [Frontend Testing](#frontend-testing)
     - [Backend Testing](#backend-testing)
   - [UML Class Diagram](#uml-class-diagram)
-    - [Frontend](#frontend)
-    - [Backend](#backend)
   - [System Statechart Diagrams](#system-statechart-diagrams)
   - [Description of System Structure](#description-of-system-structure)
     - [More on the Algorithms](#more-on-the-algorithms)
@@ -85,14 +83,10 @@ Below are the instructions for the operation of the testing suites for both the 
 --- Information on how to test the backend ---
 
 ## UML Class Diagram
-### Frontend
-![Ledger system uml class diagram](https://i.ibb.co/s6y9nXD/Ledger-Class-Diagram.png)
-
-### Backend
 ![Ledger Django uml class diagram](images/myapp_models.png)
 
 ## System Statechart Diagrams
---- Currently creating digital version ---
+![Ledger Statechart diagram](https://i.ibb.co/zZWL2Zg/Ledger-State-Diagram.png)
 
 ## Description of System Structure
 ```
